@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Meeting implements Plan{ 
+public class Meeting{ 
 	int ID; // 10 digit timestamp
 	String name="";
 	ArrayList<Person> people;

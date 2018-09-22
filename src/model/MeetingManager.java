@@ -1,8 +1,9 @@
 package model;
 
-public class MeetingModel {
+public class MeetingManager {
+	Hashtable meetings = new Hashtable();
 
-	public Meeting addPerson () {
+	public Meeting addPerson (String ,String name) {
 		Person p = new Person(name);
 		if !(meeting.people) {
 			meeting.people.add(p);
@@ -23,8 +24,10 @@ public class MeetingModel {
 		meeting.setPeople(null);
 	}
 
-	public Meeting setLocation () {
-
+	public Meeting setLocation (int startTimeDigit, String[] location) {
+		meetings.get()
+		meeting.setLocation(location);
+		return 
 	}
 	
 
