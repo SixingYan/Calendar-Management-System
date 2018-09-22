@@ -13,6 +13,7 @@ import javax.swing.Box;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
+import java.awt.Window.Type;
 
 public class MainFrame extends JFrame {
 
@@ -38,6 +39,7 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
+		setTitle("EMS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
 		contentPane = new JPanel();
@@ -50,7 +52,7 @@ public class MainFrame extends JFrame {
 		contentPane.add(list);
 		
 		JButton btnNewButton = new JButton("Add");
-		btnNewButton.setBounds(646, 27, 117, 29);
+		btnNewButton.setBounds(645, 70, 117, 29);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("load");
@@ -58,7 +60,7 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_1.setBounds(646, 91, 117, 29);
+		btnNewButton_1.setBounds(645, 134, 117, 29);
 		contentPane.add(btnNewButton_1);
 		
 		Component verticalStrut = Box.createVerticalStrut(20);
@@ -66,11 +68,11 @@ public class MainFrame extends JFrame {
 		contentPane.add(verticalStrut);
 		
 		JButton btnNewButton_2 = new JButton("edit");
-		btnNewButton_2.setBounds(646, 160, 117, 29);
+		btnNewButton_2.setBounds(645, 203, 117, 29);
 		contentPane.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("remove");
-		btnNewButton_3.setBounds(646, 224, 117, 29);
+		btnNewButton_3.setBounds(645, 267, 117, 29);
 		contentPane.add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("Show Date Schedule");
@@ -78,7 +80,7 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_4.setBounds(6, 121, 177, 29);
+		btnNewButton_4.setBounds(6, 126, 177, 29);
 		contentPane.add(btnNewButton_4);
 		
 		JTextPane txtpnCalendar = new JTextPane();
@@ -88,16 +90,32 @@ public class MainFrame extends JFrame {
 		contentPane.add(txtpnCalendar);
 		
 		JButton btnShowAllCalendars = new JButton("Show All Calendars");
-		btnShowAllCalendars.setBounds(6, 65, 177, 29);
+		btnShowAllCalendars.setBounds(6, 70, 177, 29);
 		contentPane.add(btnShowAllCalendars);
 		
 		JButton btnShowMonthSchedule = new JButton("Show Month Schedule");
-		btnShowMonthSchedule.setBounds(6, 156, 177, 29);
+		btnShowMonthSchedule.setBounds(6, 161, 177, 29);
 		contentPane.add(btnShowMonthSchedule);
 		
 		JButton btnCloseTimeplot = new JButton("Close Timeplot");
-		btnCloseTimeplot.setBounds(6, 197, 177, 29);
+		btnCloseTimeplot.setBounds(6, 202, 177, 29);
 		contentPane.add(btnCloseTimeplot);
+		
+		JButton btnNewButton_5 = new JButton("Save");
+		btnNewButton_5.setBounds(6, 338, 117, 29);
+		contentPane.add(btnNewButton_5);
+		
+		JButton btnNew = new JButton("New");
+		btnNew.setBounds(6, 297, 117, 29);
+		contentPane.add(btnNew);
+		
+		JButton btnNewButton_6 = new JButton("Load");
+		btnNewButton_6.setBounds(6, 379, 117, 29);
+		contentPane.add(btnNewButton_6);
+		
+		JButton btnNewButton_7 = new JButton("Quit");
+		btnNewButton_7.setBounds(6, 420, 117, 29);
+		contentPane.add(btnNewButton_7);
 		
 		
 	}

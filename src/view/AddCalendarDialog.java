@@ -9,12 +9,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
+import javax.swing.JComboBox;
 
 public class AddCalendarDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtPersonal;
 
 	/**
 	 * Launch the application.
@@ -58,38 +59,35 @@ public class AddCalendarDialog extends JDialog {
 			textField.setBounds(330, 88, 66, 26);
 			contentPanel.add(textField);
 			
-			
-			
-			
 			textField = new JTextField();
 			textField.setText("2018");
-			textField.setBounds(62, 142, 66, 26);
+			textField.setBounds(100, 148, 66, 26);
 			contentPanel.add(textField);
 			textField.setColumns(10);
 			
 			textField = new JTextField();
 			textField.setText("10");
 			textField.setColumns(10);
-			textField.setBounds(140, 142, 66, 26);
+			textField.setBounds(217, 148, 66, 26);
 			contentPanel.add(textField);
 			
 			textField = new JTextField();
 			textField.setText("01");
 			textField.setColumns(10);
-			textField.setBounds(215, 142, 66, 26);
+			textField.setBounds(330, 148, 66, 26);
 			contentPanel.add(textField);
 			
 			
 			textField = new JTextField();
 			textField.setText("1000");
 			textField.setColumns(10);
-			textField.setBounds(62, 194, 66, 26);
+			textField.setBounds(100, 194, 66, 26);
 			contentPanel.add(textField);
 			
 			textField = new JTextField();
 			textField.setText("1700");
 			textField.setColumns(10);
-			textField.setBounds(161, 207, 66, 26);
+			textField.setBounds(263, 194, 66, 26);
 			contentPanel.add(textField);
 			
 			
@@ -109,10 +107,11 @@ public class AddCalendarDialog extends JDialog {
 			contentPanel.add(lblNewLabel_1);
 		}
 		{
-			textField_1 = new JTextField();
-			textField_1.setBounds(122, 25, 130, 26);
-			contentPanel.add(textField_1);
-			textField_1.setColumns(10);
+			txtPersonal = new JTextField();
+			txtPersonal.setText("Personal");
+			txtPersonal.setBounds(122, 25, 130, 26);
+			contentPanel.add(txtPersonal);
+			txtPersonal.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_2 = new JLabel("Start from");
@@ -130,20 +129,44 @@ public class AddCalendarDialog extends JDialog {
 			contentPanel.add(lblNewLabel_3);
 		}
 		{
-			JLabel lblNewLabel_4 = new JLabel("New label");
-			lblNewLabel_4.setBounds(45, 114, 61, 16);
+			JLabel lblNewLabel_4 = new JLabel("Year");
+			lblNewLabel_4.setBounds(62, 153, 61, 16);
 			contentPanel.add(lblNewLabel_4);
 		}
 		{
-			JLabel lblNewLabel_5 = new JLabel("New label");
-			lblNewLabel_5.setBounds(145, 121, 61, 16);
+			JLabel lblNewLabel_5 = new JLabel("Month");
+			lblNewLabel_5.setBounds(172, 153, 61, 16);
 			contentPanel.add(lblNewLabel_5);
 		}
 		{
-			JLabel lblNewLabel_6 = new JLabel("New label");
-			lblNewLabel_6.setBounds(266, 126, 61, 16);
+			JLabel lblNewLabel_6 = new JLabel("Day");
+			lblNewLabel_6.setBounds(286, 153, 61, 16);
 			contentPanel.add(lblNewLabel_6);
 		}
+		{
+			JLabel lblNewLabel_7 = new JLabel("End to");
+			lblNewLabel_7.setBounds(6, 121, 61, 16);
+			contentPanel.add(lblNewLabel_7);
+		}
+		{
+			JLabel lblNewLabel_8 = new JLabel("Early Start by");
+			lblNewLabel_8.setBounds(6, 199, 114, 16);
+			contentPanel.add(lblNewLabel_8);
+		}
+		{
+			JLabel lblNewLabel_9 = new JLabel("Last Start by");
+			lblNewLabel_9.setBounds(172, 199, 125, 16);
+			contentPanel.add(lblNewLabel_9);
+		}
+		{
+			JLabel lblNewLabel_10 = new JLabel("Duration");
+			lblNewLabel_10.setBounds(335, 30, 61, 16);
+			contentPanel.add(lblNewLabel_10);
+		}
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(392, 26, 52, 27);
+		contentPanel.add(comboBox);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -161,5 +184,4 @@ public class AddCalendarDialog extends JDialog {
 			}
 		}
 	}
-
 }
