@@ -6,9 +6,9 @@ public class Main {
 		// TODO Auto-generated method stub
 		
 		// load data
-
+		
 		// create panel
-
+		
 		// load exist data
 	}
 

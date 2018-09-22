@@ -90,9 +90,6 @@ public class AddCalendarDialog extends JDialog {
 			textField.setBounds(263, 194, 66, 26);
 			contentPanel.add(textField);
 			
-			
-			
-			
 		}
 		{
 			JLabel lblNewLabel = new JLabel("Calendar Name");

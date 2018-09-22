@@ -1,8 +1,18 @@
 package model;
 
-public class CalendarManager {
-	Hashtable calendars = new Hashtable();
+import java.util.Hashtable;
 
+public class CalendarManager {
+	Hashtable<String,Calendar> calendars = new Hashtable<>();
+	
+	public Calendar[] getAllCalendar() {
+		
+	}
+	
+	public Stringp[] getAllCalendarString () {
+		
+	}
+	
 	public Calendar load(String name) {
 		if (name == null) return null;
 		if (calendars.contains(name)) return calendars.get(name);
