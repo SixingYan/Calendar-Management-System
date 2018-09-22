@@ -2,12 +2,12 @@ package view;
 
 import javax.swing.JPanel;
 
-public class MainPanel extends JPanel {
+public class LoginPanel extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public MainPanel() {
+	public LoginPanel() {
 
 	}
 
