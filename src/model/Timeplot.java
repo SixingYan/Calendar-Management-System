@@ -44,8 +44,4 @@ public class Timeplot {
 		return true;
 	}
 
-	public  () {
-		
-	}
-
 }

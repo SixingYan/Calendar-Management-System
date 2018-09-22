@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class EMSMainFrame extends JFrame {
+public class InfoConfirmFrame extends JFrame {
 
 	private JPanel contentPane;
 
@@ -18,7 +18,7 @@ public class EMSMainFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EMSMainFrame frame = new EMSMainFrame();
+					InfoConfirmFrame frame = new InfoConfirmFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,7 +30,7 @@ public class EMSMainFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EMSMainFrame() {
+	public InfoConfirmFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
