@@ -3,28 +3,24 @@ package model;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Meeting{ 
-	int ID; // 10 digit timestamp
-	String name="";
-	ArrayList<Person> people;
+public class Meeting{
+	ArrayList<String> people;
 	Boolean status;
-	Location location;
+	String location;
+	int startTimeDigit;
 	
-	public Meeting (ArrayList<Person> people) {
-		this.ID = generateID();
-		this.people = people;
-		this.location = new Location("Fuller","one","199");
-	}
-	
-	public Meeting (ArrayList<Person> people, Location location) {
-		this.ID = generateID();
-		this.people = people;
+	public Meeting (String location) {
 		this.location = location;
 	}
+
+	public Meeting (ArrayList<String> people) {
+		this.people = people;
+		this.location = "Fuller Lab";
+	}
 	
-	private int generateID() {
-		long timestamp = new Date().getTime();
-		return Integer.valueOf(String.valueOf(timestamp/1000));
+	public Meeting (ArrayList<String> people, String location) {
+		this.people = people;
+		this.location = location;
 	}
 
 	public void open() {
@@ -33,33 +29,6 @@ public class Meeting{
 
 	public void close() {
 		this.status = false;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public ArrayList<Person> getPeople() {
-		return people;}
-	
-	public void setPeople(ArrayList<Person> people) {
-		this.people = people;
-	}
-	
-	public Location getLocation() {
-		return location;
-	}
-	
-	public void setLocation(Location location) {
-		this.location = location;
-	}
-	
-	public int getID() {
-		return ID;
 	}
 	
 	public Boolean getStatus() {

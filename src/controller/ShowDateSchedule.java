@@ -1,5 +1,5 @@
 package controller;
 
 public class ShowDateSchedule {
-	public Meeting[] 
+	MainFrame frame;
 }
