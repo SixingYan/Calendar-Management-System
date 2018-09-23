@@ -51,11 +51,11 @@ public class MainFrame extends JFrame {
 		list.setBounds(192, 70, 416, 369);
 		contentPane.add(list);
 		
-		JButton btnNewButton = new JButton("Add");
+		JButton btnNewButton = new JButton("Add +");
 		btnNewButton.setBounds(645, 70, 117, 29);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("load");
+		JButton btnNewButton_1 = new JButton("Load =");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -63,15 +63,11 @@ public class MainFrame extends JFrame {
 		btnNewButton_1.setBounds(645, 134, 117, 29);
 		contentPane.add(btnNewButton_1);
 		
-		Component verticalStrut = Box.createVerticalStrut(20);
-		verticalStrut.setBounds(156, 6, 1, 466);
-		contentPane.add(verticalStrut);
-		
-		JButton btnNewButton_2 = new JButton("edit");
+		JButton btnNewButton_2 = new JButton("Edit *");
 		btnNewButton_2.setBounds(645, 203, 117, 29);
 		contentPane.add(btnNewButton_2);
 		
-		JButton btnNewButton_3 = new JButton("remove");
+		JButton btnNewButton_3 = new JButton("Remove -");
 		btnNewButton_3.setBounds(645, 267, 117, 29);
 		contentPane.add(btnNewButton_3);
 		

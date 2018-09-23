@@ -1,7 +1,9 @@
 package model;
 
+import java.util.Hashtable;
+
 public class TimeplotManager {
-	Hashtable timeplots = new Hashtable();
+	Hashtable<Integer,Timeplot> timeplots = new Hashtable<>();
 	int duration;
 	int earliestTimeDigit;
 	int latestTimeDigit;
@@ -18,10 +20,7 @@ public class TimeplotManager {
 	}
 
 	public void put(int dateDigit) {
-		timeplots.put(new Timeplot(dateDigit, 
-									this.duration, 
-									this.earliestTimeDigit, 
-									this.latestTimeDigit));
+		timeplots.put(dateDigit, new Timeplot(dateDigit, this.duration, this.earliestTimeDigit, this.latestTimeDigit));
 	}
 
 	public Timeplot get(int dateDigit) {
@@ -33,7 +32,7 @@ public class TimeplotManager {
 
 	public void remove(int dateDigit) {
 		if (timeplots.contains(dateDigit)) {
-			timeplots.remove(timeplots.get(dateDigit));	
+			timeplots.remove(dateDigit);	
 		}
 		
 	}

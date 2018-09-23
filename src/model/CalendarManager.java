@@ -1,16 +1,27 @@
 package model;
 
 import java.util.Hashtable;
+import java.util.Iterator;
 
 public class CalendarManager {
 	Hashtable<String,Calendar> calendars = new Hashtable<>();
 	
 	public Calendar[] getAllCalendar() {
-		
+		Calendar[] cList = new Calendar[this.calendars.size()];
+		int idx = 0;
+		for(Iterator<String> iterator=this.calendars.keySet().iterator(); iterator.hasNext(); idx++)
+			cList[idx] = this.calendars.get(iterator.next());
+		return cList;
 	}
 	
-	public Stringp[] getAllCalendarString () {
-		
+	public String[] getAllCalendarString () {
+		String[] infoList = new String[this.calendars.size()];
+		int idx = 0;
+		for(Iterator<String> iterator=this.calendars.keySet().iterator(); iterator.hasNext(); idx ++){
+			Calendar c = this.calendars.get(iterator.next());
+			infoList[idx] = c.name + " " + c.getRangeDateStr();
+		}
+		return infoList;
 	}
 	
 	public Calendar load(String name) {
@@ -19,15 +30,16 @@ public class CalendarManager {
 		return null;
 	}
 
-	public Boolean create(String name, int[] startDate, int[] endDate, int duration, int earliest, int latest) {
+	public Boolean create(String name, int startDateDigit, int endDateDigit, int duration, int earliest, int latest) {
 		if (name != null & calendars.contains(name)) return false;
-		Calendar calendar = new Calendar(name, startDate, endDate, duration, earliest, latest);
+		Calendar calendar = new Calendar(name, startDateDigit, endDateDigit, duration, earliest, latest);
+		this.calendars.put(name, calendar);
 		return true;
 	}
 
 	public Boolean delete(String name) {
-		if (calendars.contains(name)) {
-			calendars.remove(calendars.get(name));
+		if (this.calendars.contains(name)) {
+			this.calendars.remove(name);
 			return true;
 		}
 		return false;
@@ -36,7 +48,7 @@ public class CalendarManager {
 	public Boolean addDay(String name, int dateDigit) {
 		if (name != null & calendars.contains(name)) return false;
 		Calendar c = this.calendars.get(name);
-		c.addDay();
+		c.addDay(dateDigit);
 		this.calendars.put(name, c);
 		return true;
 	}
@@ -44,7 +56,7 @@ public class CalendarManager {
 	public Boolean removeDay(String name,  int dateDigit) {
 		if (name != null & calendars.contains(name)) return false;
 		Calendar c = this.calendars.get(name);
-		c.removeDay();
+		c.removeDay(dateDigit);
 		this.calendars.put(name, c);
 		return true;
 	}

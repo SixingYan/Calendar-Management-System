@@ -1,44 +1,51 @@
 package model;
 
+import java.util.Hashtable;
+
 public class Calendar {
 	int startDateDigit; // YYYYMMDD
 	int endDateDigit; // YYYYMMDD
 	int duration;
-	int earliestTimeDigit; //HHMM
-	int latestTimeDigit; //HHMM
-	TimeplotManager tManager;
+	int earlyTimeDigit; //HHMM
+	int lateTimeDigit; //HHMM
+	Hashtable <Integer,Timeplot> tManager = new Hashtable<>();
 	String name;
+	String detail;
 
 	public Calendar (String name, int startDateDigit, int endDateDigit, 
-					int duration, int earliestTimeDigit, int latestTimeDigit) {
+					int duration, int earlyTimeDigit, int lateTimeDigit) {
 		this.startDateDigit = startDateDigit; // YYYYMMDD
 		this.endDateDigit = endDateDigit;
 		this.duration = duration;
-		this.earliestTimeDigit = earliestTimeDigit;
-		this.latestTimeDigit = latestTimeDigit;
+		this.earlyTimeDigit = earlyTimeDigit;
+		this.lateTimeDigit = lateTimeDigit;
 		this.name = name;
-		this.tManager = new TimeplotManager(startDateDigit, endDateDigit, duration, earliestTimeDigit, latestTimeDigit);
+		this.detail = getDetail();
+		for (int d=startDateDigit; d < endDateDigit+1; d++) 
+			this.tManager.put(d, new Timeplot(d, duration, earlyTimeDigit, lateTimeDigit, this.detail));
+		
+		//this.tManager = new TimeplotManager(startDateDigit, endDateDigit, duration, earliestTimeDigit, latestTimeDigit);
 	}
 
-	public int[] getRange() {
-		int[] rangeDate = new int[2];
-		rangeDate[0] = this.startDateDigit;
-		rangeDate[1] = this.endDateDigit;
-		return rangeDate;
+	public String getRangeDateStr() {
+		return String.valueOf(this.startDateDigit) + "-" + String.valueOf(this.endDateDigit);
 	}
 
 	public void addDay(int dateDigit) {
 		if (!this.tManager.contains(dateDigit)) {
-			Timeplot t = new Timeplot(dateDigit, this.duration, this.earliest, this.latest)
+			Timeplot t = new Timeplot(dateDigit, this.duration, this.earliestTimeDigit, this.latestTimeDigit);
 			this.tManager.put(dateDigit, t);
 		}
-		if dateDigit
 	}
 
 	public void removeDay(int dateDigit) {
 		if (this.tManager.contains(dateDigit)) {
-			tManager.remove(tManager.get(name));
+			tManager.remove(dateDigit);
 		}
+	}
+	
+	public String getDetail() {
+		return this.name + " " + getRangeDateStr();
 	}
 	
 	public int getDuration() {
@@ -56,13 +63,5 @@ public class Calendar {
 	public int getEndDateDigit() {
 		return endDateDigit;
 	}
-
-	public int getEarliestTimeDigit() {
-		return earliestTimeDigit;
-	}
-
-	public int getLatestTimeDigit() {
-		return latestTimeDigit;
-	}
-
+	
 }
