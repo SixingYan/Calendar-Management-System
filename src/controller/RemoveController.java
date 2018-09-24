@@ -10,4 +10,22 @@ public class RemoveController {
 	}
 
 	public void remove () {
+
+	}
+
+	public void removeCalendar () {
+
+	}
+
+	public void removeTimeplot () {
+
+	}
+
+	public void removeMeeting () {
+
+	}
+
+	public void removePerson () {
+
+	}
 }

@@ -30,11 +30,11 @@ public class AddController {
 		if (object.equals("calendars") & value.equals("all"))
 			addCalendar();
 		else if (object.equals("timeplots"))
-			addTimeplot(value);
+			addTimeplot();
 		else if (object.equals("meetings"))
-			addMeeting(value);
+			addMeeting();
 		else if (object.equals("meeting"))
-			addPerson(value);
+			addPerson();
 		else ;
 	}
 
@@ -51,7 +51,6 @@ public class AddController {
 		acd.setVisible(true);
 
 		if (acd.wasUpdated()) {
-
 			String name = acd.getNameField().getText();
 			int duration = (int) acd.getDurationComboBox().getSelectedItem();
 			String startYear = acd.getStartYearField().getText();
@@ -84,7 +83,7 @@ public class AddController {
 
 	} 
 
-	public void addTimeplot(String calendarName) {
+	public void addTimeplot() {
 		AddTimeplotDialog atd = new AddTimeplotDialog();
 
 		if (atd.wasUpdated()) {
@@ -106,7 +105,7 @@ public class AddController {
 		frame.repaint();
 	}
 
-	public void addMeeting(String calendarName, String dateDigit) {
+	public void addMeeting() {
 
 		AddMeetingDialog amd = new AddMeetingDialog();
 

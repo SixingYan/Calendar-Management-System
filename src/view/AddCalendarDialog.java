@@ -282,4 +282,8 @@ public class AddCalendarDialog extends JDialog {
 		return cancelButton;
 	}
 
+	public JTextField getNameField() {
+		return nameField;
+	}
+
 }

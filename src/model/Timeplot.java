@@ -4,23 +4,29 @@ import java.util.Hashtable;
 
 public class Timeplot {
 	
-	Hashtable<Integer, Meeting> meetingMgr = new Hashtable<>();
+	public Hashtable<Integer, Meeting> meetingMgr = new Hashtable<>();
 	int maxNumber;
-	int dateDigit;
+	int date;
 	int duration;
-	int earlyTimeDigit; //1500
-	int lateTimeDigit; //1000
+	int early; //1500
+	int late; //1000
 	Boolean status = true;
 	String detail;
 	String[][] availStartMM = {{"00","15","30","45"},{"00","20","40"},{"00","30"}};
 	
-	public Timeplot(int dateDigit, int duration, int earlyTimeDigit, int lateTimeDigit, String detail){
-		this.dateDigit = dateDigit;
+	public Timeplot(int date, int duration, int early, int late, String detail){
+		this.date = date;
 		this.duration = duration;
-		this.earlyTimeDigit = earlyTimeDigit;
-		this.lateTimeDigit = lateTimeDigit;
-		this.detail = detail + getDetail();
+		this.early = early;
+		this.late = late;
+		//this.detail = detail + getDetail();
 	}
+
+	public String getTimeRangeStr() {
+		return this.early + "-" + this.late; 
+	}
+
+
 	public int[] getAvailStartTime() {
 		String[] mins;
 		int eHour = this.;
@@ -73,6 +79,6 @@ public class Timeplot {
 	}
 	
 	public String getDetail() {
-		return " " + String.valueOf(this.dateDigit) + " ";
+		return " " + String.valueOf(this.date) + " ";
 	}
 }
