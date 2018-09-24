@@ -19,7 +19,10 @@ public class SelectDateTimeDialog extends JDialog {
 	private JTextField textField;
 	private JTextField textField_2;
 	private JTextField textField_1;
-
+	private Boolean updated = false;
+	public Boolean wasUpdated() {
+		return updated;
+	}
 	/**
 	 * Launch the application.
 	 */
@@ -46,16 +49,19 @@ public class SelectDateTimeDialog extends JDialog {
 		{
 			
 			textField = new JTextField();
+			textField.setText("2018");
 			textField.setBounds(89, 103, 66, 26);
 			contentPanel.add(textField);
 			textField.setColumns(10);
 			
 			textField_1 = new JTextField();
+			textField_1.setText("11");
 			textField_1.setBounds(206, 103, 66, 26);
 			textField_1.setColumns(10);
 			contentPanel.add(textField_1);
 			
 			textField_2 = new JTextField();
+			textField_2.setText("01");
 			textField_2.setBounds(305, 103, 66, 26);
 			textField_2.setColumns(10);
 			contentPanel.add(textField_2);
@@ -81,9 +87,9 @@ public class SelectDateTimeDialog extends JDialog {
 			contentPanel.add(lblNewLabel);
 		}
 		{
-			JComboBox comboBox = new JComboBox();
-			comboBox.setBounds(134, 150, 66, 27);
-			contentPanel.add(comboBox);
+			JComboBox DoWComboBox = new JComboBox();
+			DoWComboBox.setBounds(134, 150, 66, 27);
+			contentPanel.add(DoWComboBox);
 		}
 		{
 			JLabel lblNewLabel_1 = new JLabel("Time of Day");
@@ -91,9 +97,9 @@ public class SelectDateTimeDialog extends JDialog {
 			contentPanel.add(lblNewLabel_1);
 		}
 		{
-			JComboBox comboBox = new JComboBox();
-			comboBox.setBounds(315, 150, 71, 27);
-			contentPanel.add(comboBox);
+			JComboBox TimeComboBox = new JComboBox();
+			TimeComboBox.setBounds(315, 150, 71, 27);
+			contentPanel.add(TimeComboBox);
 		}
 		{
 			JLabel lblNewLabel_2 = new JLabel("Enter Date and/or Time");
@@ -108,6 +114,7 @@ public class SelectDateTimeDialog extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						updated = true;
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -116,6 +123,11 @@ public class SelectDateTimeDialog extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						updated = false;
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

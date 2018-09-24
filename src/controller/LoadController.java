@@ -1,6 +1,15 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import model.Calendar;
+import model.Meeting;
+import model.Timeplot;
 import view.MainFrame;
+import view.SelectDateDialog;
+import view.SelectNameDialog;
+import view.SelectTimeDialog;
 
 public class LoadController {
 	MainFrame frame;
@@ -25,19 +34,19 @@ public class LoadController {
 
 	public void loadCalendar () {
 		SelectNameDialog sbd = new SelectNameDialog();
-
+		
 		if (sbd.wasUpdated()) {
-			name = sbd.getNameField().getText();
-			// if not found
+			String name = sbd.getNameField().getText();
 
-
-			c = this.frame.curCalendarMgr.get(name);
+			Calendar c = this.frame.curCalendarMgr.get(name);
 			this.frame.valueField.setText(c.name + " " + c.getRangeDateStr()); 
 
 			this.frame.curCalendar = name;
-			c.timeplotMgr
-			this.frame.textList
 
+			ArrayList<String> arr = new ArrayList<>();
+			for(Iterator<Integer> itr = c.timeplotMgr.keySet().iterator(); itr.hasNext();)
+				arr.add(c.timeplotMgr.get(itr.next()).getString());
+			this.frame.textList.setListData((String[]) arr.toArray());
 		}
 		sbd.dispose();
 
@@ -47,19 +56,22 @@ public class LoadController {
 	public void loadTimeplot ()  {
 		SelectDateDialog sdd = new SelectDateDialog();
 		if (sdd.wasUpdated()) {
-			String year = atd.getYearField().getText();
-			String month = atd.getMonthField().getText();
-			String day = atd.getDayField().getText();
+			String year = sdd.getYearField().getText();
+			String month = sdd.getMonthField().getText();
+			String day = sdd.getDayField().getText();
 
 			int date = Integer.valueOf(year+month+day).intValue();
-			c = this.frame.curCalendarMgr.get(this.frame.curCalendar).
-			t = c.timeplotMgr.get(date); 
+			Calendar c = this.frame.curCalendarMgr.get(this.frame.curCalendar);
+			Timeplot t = c.timeplotMgr.get(date); 
 			this.frame.valueField.setText(year+month+day); 
 
-
+			ArrayList<String> arr = new ArrayList<>();
 			this.frame.curTimeplot = date;
-			t.meetingMgr
-			this.frame.textList
+			for(Iterator<Integer> itr = t.meetingMgr.keySet().iterator(); itr.hasNext();)
+				arr.add(t.meetingMgr.get(itr.next()).getString());
+			
+			this.frame.textList.setListData((String[]) arr.toArray());
+
 		}
 		sdd.dispose();
 
@@ -69,16 +81,19 @@ public class LoadController {
 	public void loadMeeting () {
 		SelectTimeDialog std = new SelectTimeDialog();
 		if (std.wasUpdated()) {
-			String timeStr = amd.getTimeField().getText();
-			String time = Integer.valueOf(timeStr).intValue()
+			String timeStr = std.getTimeField().getText();
+			int time = Integer.valueOf(timeStr).intValue();
 
-			c = this.frame.curCalendarMgr.get(this.frame.curCalendar);
-			t = c.timeplotMgr.get(this.frame.curTimeplot);
-			m = t.meetingMgr.get();
+			Calendar c = this.frame.curCalendarMgr.get(this.frame.curCalendar);
+			Timeplot t = c.timeplotMgr.get(this.frame.curTimeplot);
+			Meeting m = t.meetingMgr.get(time);
 
+			ArrayList<String> arr = new ArrayList<>();
 			this.frame.curMeeting = time;
-			m.people
-			this.frame.textList
+			for(int i=0; i < m.people.size(); i++)
+				arr.add(m.people.get(i));
+
+			this.frame.textList.setListData((String[]) arr.toArray());
 
 		}
 		std.dispose();

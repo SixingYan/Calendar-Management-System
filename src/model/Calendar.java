@@ -9,8 +9,8 @@ public class Calendar {
 	int early; //HHMM
 	int late; //HHMM
 	public Hashtable <Integer,Timeplot> timeplotMgr = new Hashtable<>();
-	String name;
-	String detail;
+	public String name;
+	//String detail;
 
 	public Calendar (String name, int start, int end, 
 					int duration, int early, int late) {
@@ -20,11 +20,12 @@ public class Calendar {
 		this.early = early;
 		this.late = late;
 		this.name = name;
-		this.detail = getDetail();
 		for (int d=start; d < end+1; d++) 
-			this.timeplotMgr.put(d, new Timeplot(d, duration, early, late, this.detail));
+			this.timeplotMgr.put(d, new Timeplot(d, duration, early, late));
 	}
-
+	public String getString() {
+		return name + " " + getRangeDateStr();
+	}
 	public String getRangeDateStr() {
 		return String.valueOf(this.start) + "-" + String.valueOf(this.end);
 	}
@@ -39,10 +40,6 @@ public class Calendar {
 		if (this.timeplotMgr.contains(dateDigit)) {
 			timeplotMgr.remove(dateDigit);
 		}
-	}
-	
-	public String getString() {
-		return //this.name + " " + getRangeDateStr();
 	}
 	
 	public int getDuration() {

@@ -9,11 +9,17 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class SelectTimeDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-
+	private Boolean updated = false;
+	private JTextField timeField;
+	public Boolean wasUpdated() {
+		return updated;
+	}
 	/**
 	 * Launch the application.
 	 */
@@ -31,11 +37,21 @@ public class SelectTimeDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public SelectTimeDialog() {
+		setTitle("Select Time");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Time");
+		lblNewLabel.setBounds(57, 120, 61, 16);
+		contentPanel.add(lblNewLabel);
+		
+		timeField = new JTextField();
+		timeField.setBounds(130, 115, 130, 26);
+		contentPanel.add(timeField);
+		timeField.setColumns(10);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -44,6 +60,7 @@ public class SelectTimeDialog extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						updated = true;
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -54,6 +71,7 @@ public class SelectTimeDialog extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						updated = false;
 					}
 				});
 				cancelButton.setActionCommand("Cancel");
@@ -61,5 +79,7 @@ public class SelectTimeDialog extends JDialog {
 			}
 		}
 	}
-
+	public JTextField getTimeField() {
+		return timeField;
+	}
 }

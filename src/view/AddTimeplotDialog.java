@@ -105,6 +105,7 @@ public class AddTimeplotDialog extends JDialog {
 				cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						updated = false;
 					}
 				});
 				cancelButton.setActionCommand("Cancel");

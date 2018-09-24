@@ -15,8 +15,13 @@ import javax.swing.JTextField;
 public class SelectDateDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-
+	private JTextField yearField;
+	private JTextField monthField;
+	private JTextField dayField;
+	private Boolean updated = false;
+	public Boolean wasUpdated() {
+		return updated;
+	}
 	/**
 	 * Launch the application.
 	 */
@@ -41,14 +46,35 @@ public class SelectDateDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Date");
-		lblNewLabel.setBounds(49, 108, 61, 16);
+		JLabel lblNewLabel = new JLabel("Year");
+		lblNewLabel.setBounds(6, 107, 61, 16);
 		contentPanel.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(122, 103, 130, 26);
-		contentPanel.add(textField);
-		textField.setColumns(10);
+		yearField = new JTextField();
+		yearField.setText("2018");
+		yearField.setBounds(79, 102, 61, 26);
+		contentPanel.add(yearField);
+		yearField.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Month");
+		lblNewLabel_1.setBounds(152, 107, 61, 16);
+		contentPanel.add(lblNewLabel_1);
+		
+		monthField = new JTextField();
+		monthField.setText("10");
+		monthField.setBounds(225, 102, 61, 26);
+		contentPanel.add(monthField);
+		monthField.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("Day");
+		lblNewLabel_2.setBounds(298, 107, 61, 16);
+		contentPanel.add(lblNewLabel_2);
+		
+		dayField = new JTextField();
+		dayField.setText("11");
+		dayField.setBounds(371, 102, 61, 26);
+		contentPanel.add(dayField);
+		dayField.setColumns(10);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -74,4 +100,14 @@ public class SelectDateDialog extends JDialog {
 			}
 		}
 	}
+	public JTextField getYearField() {
+		return yearField;
+	}
+	public JTextField getMonthField() {
+		return monthField;
+	}
+	public JTextField getDayField() {
+		return dayField;
+	}
+	
 }

@@ -19,7 +19,10 @@ public class SelectNameDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField nameField;
-
+	private Boolean updated = false;
+	public Boolean wasUpdated() {
+		return updated;
+	}
 	/**
 	 * Launch the application.
 	 */
@@ -93,6 +96,9 @@ public class SelectNameDialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+	public JTextField getNameField() {
+		return nameField;
 	}
 
 }

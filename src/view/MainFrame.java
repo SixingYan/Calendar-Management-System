@@ -9,7 +9,6 @@ import javax.swing.border.EmptyBorder;
 
 
 import controller.AddController;
-import controller.EditController;
 import controller.LoadController;
 import controller.RemoveController;
 import model.Calendar;
@@ -31,16 +30,9 @@ public class MainFrame extends JFrame {
 	public String curCalendar;
 	public int curTimeplot;
 	public int curMeeting;
-
 	public JList<String> textList;
-
-
 	public JTextPane valueField;
 	public JTextPane objectField;
-	
-	private String value; 
-	private String object;
-
 
 	/**
 	 * Launch the application.
@@ -61,7 +53,9 @@ public class MainFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+
 	public MainFrame() {
+		
 		setTitle("EMS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
@@ -71,6 +65,7 @@ public class MainFrame extends JFrame {
 		contentPane.setLayout(null);
 		
 		textList = new JList();
+		//textList.setListData(textArrList.toArray());
 		textList.setBounds(192, 70, 416, 369);
 		contentPane.add(textList);
 		
@@ -87,22 +82,13 @@ public class MainFrame extends JFrame {
 		btnNewButton_1.setBounds(645, 134, 117, 29);
 		contentPane.add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("Edit *");
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new EditController(MainFrame.this).edit();
-			}
-		});
-		btnNewButton_2.setBounds(645, 203, 117, 29);
-		contentPane.add(btnNewButton_2);
-		
 		JButton btnNewButton_3 = new JButton("Remove -");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new RemoveController(MainFrame.this).remove();
 			}
 		});
-		btnNewButton_3.setBounds(645, 267, 117, 29);
+		btnNewButton_3.setBounds(645, 202, 117, 29);
 		contentPane.add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("Show Date Schedule");
@@ -113,8 +99,6 @@ public class MainFrame extends JFrame {
 		btnNewButton_4.setBounds(6, 126, 177, 29);
 		contentPane.add(btnNewButton_4);
 		
-
-
 		this.objectField = new JTextPane();
 		objectField.setEditable(false);
 		objectField.setText("Calendar");
@@ -126,8 +110,6 @@ public class MainFrame extends JFrame {
 		valueField.setText("All");
 		valueField.setBounds(399, 26, 208, 32);
 		contentPane.add(valueField);
-		
-
 
 		JButton btnShowAllCalendars = new JButton("Show All Calendars");
 		btnShowAllCalendars.setBounds(6, 70, 177, 29);
@@ -157,11 +139,13 @@ public class MainFrame extends JFrame {
 		btnNewButton_7.setBounds(6, 420, 117, 29);
 		contentPane.add(btnNewButton_7);
 		
-		
-		
-		
 	}
-
+	
+	public MainFrame(Hashtable<String, Calendar> calendarMgr) {
+		this.curCalendarMgr = calendarMgr;
+		MainFrame();
+	}
+	
 	public String getString(JTextPane field) {
 		return field.getText();
 	}
