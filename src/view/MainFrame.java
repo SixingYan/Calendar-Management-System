@@ -32,7 +32,7 @@ public class MainFrame extends JFrame {
 	public int curTimeplot;
 	public int curMeeting;
 
-	JList<String> textList;
+	public JList<String> textList;
 
 
 	public JTextPane valueField;

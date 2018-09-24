@@ -4,7 +4,7 @@ import java.util.Hashtable;
 
 public class Timeplot {
 	
-	Hashtable<Integer, Meeting> mManager = new Hashtable<>();
+	Hashtable<Integer, Meeting> meetingMgr = new Hashtable<>();
 	int maxNumber;
 	int dateDigit;
 	int duration;
@@ -37,17 +37,17 @@ public class Timeplot {
 	}
 	
 	public Boolean wasFull() {
-		if (mManager.size() == maxNumber)
+		if (meetingMgr.size() == maxNumber)
 			return true;
 		return false;
 	}
 
 	public Boolean addMeeting(int startTimeDigit, String[] people, String location) {
-		if (mManager.contains(startTimeDigit)) {
+		if (meetingMgr.contains(startTimeDigit)) {
 			return false;
 		}
 		else {
-			Enumeration digits = mManager.keys();
+			Enumeration digits = meetingMgr.keys();
 			while (digits.hasMoreElements()){
 				int t = digits.nextElement();
 				if (t > startTimeDigit & (t - this.duration) < startTimeDigit){
@@ -60,15 +60,15 @@ public class Timeplot {
 		}
 		
 		Meeting m = new 
-		mManager.put(startTimeDigit, m);
+		meetingMgr.put(startTimeDigit, m);
 		return true;
 	}
 
 	public Boolean removeMeeting(int startTimeDigit) {
-		if (!mManager.contains(startTimeDigit)) {
+		if (!meetingMgr.contains(startTimeDigit)) {
 			return false;
 		}
-		mManager.remove(mManager.get(startTimeDigit));
+		meetingMgr.remove(meetingMgr.get(startTimeDigit));
 		return true;
 	}
 	

@@ -22,7 +22,10 @@ public class AddMeetingDialog extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField nameField;
 	private JTextField locationField;
+	private JTextField timeField;
 	private JList personList;
+	private JButton okButton;
+	private JButton cancelButton;
 	
 	/**
 	 * Launch the application.
@@ -36,7 +39,7 @@ public class AddMeetingDialog extends JDialog {
 			e.printStackTrace();
 		}
 	}
-
+	
 	Meeting m;
 	boolean updated = false;
 	private JTextField textField;
@@ -104,10 +107,11 @@ public class AddMeetingDialog extends JDialog {
 			textField.setColumns(10);
 		}
 		{
-			textField_1 = new JTextField();
-			textField_1.setBounds(163, 41, 130, 26);
-			contentPanel.add(textField_1);
-			textField_1.setColumns(10);
+			timeField = new JTextField();
+			timeField.setText("1000");
+			timeField.setBounds(163, 41, 130, 26);
+			contentPanel.add(timeField);
+			timeField.setColumns(10);
 		}
 		
 		{
@@ -115,7 +119,7 @@ public class AddMeetingDialog extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						updated = true;
@@ -127,7 +131,7 @@ public class AddMeetingDialog extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						updated = false;
@@ -152,16 +156,8 @@ public class AddMeetingDialog extends JDialog {
 		return nameField;
 	}
 
-	public void setNameField(JTextField nameField) {
-		this.nameField = nameField;
-	}
-
 	public JTextField getLocationField() {
 		return locationField;
-	}
-
-	public void setLocationField(JTextField locationField) {
-		this.locationField = locationField;
 	}
 
 	public JList getPersonList() {
@@ -170,5 +166,9 @@ public class AddMeetingDialog extends JDialog {
 
 	public void setPersonList(JList personList) {
 		this.personList = personList;
+	}
+
+	public JTextField getTimeField() {
+		return timeField;
 	}
 }

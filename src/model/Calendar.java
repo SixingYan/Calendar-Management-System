@@ -8,7 +8,7 @@ public class Calendar {
 	int duration;
 	int early; //HHMM
 	int late; //HHMM
-	Hashtable <Integer,Timeplot> timeplotMgr = new Hashtable<>();
+	public Hashtable <Integer,Timeplot> timeplotMgr = new Hashtable<>();
 	String name;
 	String detail;
 
@@ -30,7 +30,7 @@ public class Calendar {
 	}
 
 	public Timeplot addDay(int dateDigit) {
-		Timeplot t = new Timeplot(dateDigit, this.duration, this.earliestTimeDigit, this.latestTimeDigit);
+		Timeplot t = new Timeplot(dateDigit, this.duration, this.early, this.late);
 		this.timeplotMgr.put(dateDigit, t);
 		return t;
 	}

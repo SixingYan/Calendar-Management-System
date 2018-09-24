@@ -15,9 +15,13 @@ import java.awt.event.ActionEvent;
 public class AddTimeplotDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private JTextField yearField;
 	private JTextField monthField;
 	private JTextField dayField;
 	private Boolean updated = false;
+	private JButton okButton;
+	private JButton cancelButton;
+	private JLabel lblNewLabel_3;
 	/**
 	 * Launch the application.
 	 */
@@ -43,13 +47,13 @@ public class AddTimeplotDialog extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JLabel lblNewLabel = new JLabel("Month");
-			lblNewLabel.setBounds(6, 104, 61, 16);
+			lblNewLabel.setBounds(175, 103, 61, 16);
 			contentPanel.add(lblNewLabel);
 		}
 		{
 			monthField = new JTextField();
 			monthField.setText("10");
-			monthField.setBounds(80, 99, 130, 26);
+			monthField.setBounds(248, 98, 61, 26);
 			contentPanel.add(monthField);
 			monthField.setColumns(10);
 		}
@@ -60,22 +64,34 @@ public class AddTimeplotDialog extends JDialog {
 		}
 		{
 			JLabel lblNewLabel_2 = new JLabel("Day");
-			lblNewLabel_2.setBounds(222, 104, 61, 16);
+			lblNewLabel_2.setBounds(321, 103, 61, 16);
 			contentPanel.add(lblNewLabel_2);
 		}
 		{
 			dayField = new JTextField();
 			dayField.setText("11");
-			dayField.setBounds(314, 99, 130, 26);
+			dayField.setBounds(383, 98, 61, 26);
 			contentPanel.add(dayField);
 			dayField.setColumns(10);
+		}
+		{
+			yearField = new JTextField();
+			yearField.setText("2018");
+			yearField.setBounds(102, 98, 61, 26);
+			contentPanel.add(yearField);
+			yearField.setColumns(10);
+		}
+		{
+			lblNewLabel_3 = new JLabel("Year");
+			lblNewLabel_3.setBounds(29, 103, 61, 16);
+			contentPanel.add(lblNewLabel_3);
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						updated = true;
@@ -86,7 +102,7 @@ public class AddTimeplotDialog extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 					}
@@ -99,6 +115,26 @@ public class AddTimeplotDialog extends JDialog {
 
 	public Boolean wasUpdated(){
 		return updated;
+	}
+
+	public JTextField getMonthField() {
+		return monthField;
+	}
+
+	public JTextField getDayField() {
+		return dayField;
+	}
+
+	public JButton getOkButton() {
+		return okButton;
+	}
+
+	public JButton getCancelButton() {
+		return cancelButton;
+	}
+
+	public JTextField getYearField() {
+		return yearField;
 	}
 
 }

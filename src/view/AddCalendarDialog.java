@@ -274,4 +274,12 @@ public class AddCalendarDialog extends JDialog {
 		return lateField;
 	}
 
+	public JButton getOkButton() {
+		return okButton;
+	}
+
+	public JButton getCancelButton() {
+		return cancelButton;
+	}
+
 }

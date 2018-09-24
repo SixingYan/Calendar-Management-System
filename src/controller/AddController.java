@@ -4,6 +4,7 @@ import javax.swing.ListModel;
 
 import model.Calendar;
 import model.Meeting;
+import model.Timeplot;
 import view.AddCalendarDialog;
 import view.AddMeetingDialog;
 import view.AddTimeplotDialog;
@@ -110,10 +111,10 @@ public class AddController {
 		AddMeetingDialog amd = new AddMeetingDialog();
 
 		if (amd.wasUpdated()) {
-			String time = amd.getSelectTimeField().getText();
+			String time = amd.getTimeField().getText();
 			String location = amd.getLocationField().getText();
 			
-			ListModel<String> peopleList = amd.getPersonJList().getModel();
+			ListModel<String> peopleList = amd.getPersonList().getModel();
 			String[] people = new String[peopleList.getSize()];
 			for (int i=0;i< peopleList.getSize();i++)
 				people[i] = peopleList.getElementAt(i);
@@ -122,11 +123,11 @@ public class AddController {
 			//Calendar c = this.frame.curCalendarMgr.get(calendarName);
 			
 			// update the calendar mgr
-			Calendar c = this.frame.get(this.frame.curCalendar)
-			Timeplot t = c.get(this.frame.curTimeplot);
-			t.meetingMgr.put(timeDigit, m);
+			Calendar c = this.frame.curCalendarMgr.get(this.frame.curCalendar)
+			Timeplot t = c.timeplotMgr.get(this.frame.curTimeplot);
+			t.meetingMgr.put(time, m);
 			c.timeplotMgr.put(this.frame.curTimeplot, t);
-			this.frame.curCalendarMgr.put(this.calendarName, c);
+			this.frame.curCalendarMgr.put(this.frame.curCalendar, c);
 
 			// update the JList
 			this.frame.textList.add(m.getString());
