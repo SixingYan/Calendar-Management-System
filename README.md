@@ -61,3 +61,25 @@ timeplot:
 
 
 
+cName 20180924-20181001 activated/closed/full
+
+20180924 activated/closed/full
+
+1315 activated/closed/full location
+
+
+
+
+status
+
+
+
+
+
+
+
+
+
+
+
+

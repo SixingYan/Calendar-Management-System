@@ -22,7 +22,8 @@ public class AddMeetingDialog extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField nameField;
 	private JTextField locationField;
-
+	private JList personList;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -38,7 +39,8 @@ public class AddMeetingDialog extends JDialog {
 
 	Meeting m;
 	boolean updated = false;
-	boolean global = true;
+	private JTextField textField;
+	private JTextField textField_1;
 	/**
 	 * Create the dialog.
 	 */
@@ -51,34 +53,14 @@ public class AddMeetingDialog extends JDialog {
 		contentPanel.setLayout(null);
 
 		JLabel selectCalendarLable = new JLabel("Select Calendar");
+		selectCalendarLable.setEnabled(false);
 		selectCalendarLable.setBounds(6, 18, 101, 16);
 		contentPanel.add(selectCalendarLable);
 		
-			JComboBox selectCalendarComboBox = new JComboBox();
-			selectCalendarComboBox.setBounds(119, 14, 135, 27);
-			contentPanel.add(selectCalendarComboBox);
+		JLabel selectTimeLable = new JLabel("Select Time");
+		selectTimeLable.setBounds(6, 46, 79, 16);
+		contentPanel.add(selectTimeLable);
 		
-			JLabel selectTimeLable = new JLabel("Select Time");
-			selectTimeLable.setBounds(6, 46, 79, 16);
-			contentPanel.add(selectTimeLable);
-		
-			JComboBox selectTimeComboBox = new JComboBox();
-			selectTimeComboBox.setBounds(119, 42, 135, 27);
-			contentPanel.add(selectTimeComboBox);
-		
-		if (this.global) {
-			selectCalendarLable.setVisible(true);
-			selectCalendarComboBox.setVisible(true);
-			selectTimeLable.setVisible(true);
-			selectTimeComboBox.setVisible(true);
-		}
-		else {
-			selectCalendarLable.setVisible(false);
-			selectCalendarComboBox.setVisible(false);
-			selectTimeLable.setVisible(false);
-			selectTimeComboBox.setVisible(false);
-		}
-
 		{
 			JLabel lblNewLabel_1 = new JLabel("Enter or Select Person");
 			lblNewLabel_1.setBounds(6, 106, 145, 16);
@@ -92,19 +74,14 @@ public class AddMeetingDialog extends JDialog {
 			nameField.setColumns(10);
 		}
 		{
-			JComboBox comboBox = new JComboBox();
-			comboBox.setBounds(305, 102, 112, 27);
-			contentPanel.add(comboBox);
-		}
-		{
 			JButton btnNewButton = new JButton("Add +");
-			btnNewButton.setBounds(429, 101, 117, 29);
+			btnNewButton.setBounds(297, 101, 117, 29);
 			contentPanel.add(btnNewButton);
 		}
 		{
-			JList list = new JList();
-			list.setBounds(6, 134, 537, 116);
-			contentPanel.add(list);
+			personList = new JList();
+			personList.setBounds(6, 134, 537, 116);
+			contentPanel.add(personList);
 		}
 		{
 			JLabel lblNewLabel_2 = new JLabel("Enter or Select Location");
@@ -119,9 +96,18 @@ public class AddMeetingDialog extends JDialog {
 			locationField.setColumns(10);
 		}
 		{
-			JComboBox comboBox = new JComboBox();
-			comboBox.setBounds(305, 69, 112, 27);
-			contentPanel.add(comboBox);
+			textField = new JTextField();
+			textField.setEditable(false);
+			textField.setEnabled(false);
+			textField.setBounds(163, 13, 130, 26);
+			contentPanel.add(textField);
+			textField.setColumns(10);
+		}
+		{
+			textField_1 = new JTextField();
+			textField_1.setBounds(163, 41, 130, 26);
+			contentPanel.add(textField_1);
+			textField_1.setColumns(10);
 		}
 		
 		{
@@ -154,12 +140,35 @@ public class AddMeetingDialog extends JDialog {
 		}
 	}
 
-	public AddMeetingDialog(String temp) { // open global
-		this.global = true;
-		//this (new Meeting ("Fuller Lab"));
-
+	public Boolean wasUpdated() {
+		return updated;
 	}
-	public AddMeetingDialog(String calendarName, int timeplot) {
 
+	public Boolean nameWasUpdated() {
+		return updated;
+	}
+
+	public JTextField getNameField() {
+		return nameField;
+	}
+
+	public void setNameField(JTextField nameField) {
+		this.nameField = nameField;
+	}
+
+	public JTextField getLocationField() {
+		return locationField;
+	}
+
+	public void setLocationField(JTextField locationField) {
+		this.locationField = locationField;
+	}
+
+	public JList getPersonList() {
+		return personList;
+	}
+
+	public void setPersonList(JList personList) {
+		this.personList = personList;
 	}
 }

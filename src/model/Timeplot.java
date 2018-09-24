@@ -5,6 +5,7 @@ import java.util.Hashtable;
 public class Timeplot {
 	
 	Hashtable<Integer, Meeting> mManager = new Hashtable<>();
+	int maxNumber;
 	int dateDigit;
 	int duration;
 	int earlyTimeDigit; //1500
@@ -18,7 +19,7 @@ public class Timeplot {
 		this.duration = duration;
 		this.earlyTimeDigit = earlyTimeDigit;
 		this.lateTimeDigit = lateTimeDigit;
-		this.detail =detail + getDetail();
+		this.detail = detail + getDetail();
 	}
 	public int[] getAvailStartTime() {
 		String[] mins;
@@ -33,9 +34,14 @@ public class Timeplot {
 		else {
 			
 		}
-		
 	}
 	
+	public Boolean wasFull() {
+		if (mManager.size() == maxNumber)
+			return true;
+		return false;
+	}
+
 	public Boolean addMeeting(int startTimeDigit, String[] people, String location) {
 		if (mManager.contains(startTimeDigit)) {
 			return false;

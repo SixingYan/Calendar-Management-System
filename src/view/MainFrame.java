@@ -6,11 +6,20 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+
+import controller.AddController;
+import controller.EditController;
+import controller.LoadController;
+import controller.RemoveController;
+import model.Calendar;
+
 import javax.swing.JList;
 import javax.swing.JButton;
 import java.awt.Component;
 import javax.swing.Box;
 import java.awt.event.ActionListener;
+import java.util.Hashtable;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import java.awt.Window.Type;
@@ -18,6 +27,20 @@ import java.awt.Window.Type;
 public class MainFrame extends JFrame {
 
 	private JPanel contentPane;
+	public Hashtable<String, Calendar> curCalendarMgr;
+	public String curCalendar;
+	public int curTimeplot;
+	public int curMeeting;
+
+	JList<String> textList;
+
+
+	public JTextPane valueField;
+	public JTextPane objectField;
+	
+	private String value; 
+	private String object;
+
 
 	/**
 	 * Launch the application.
@@ -47,9 +70,9 @@ public class MainFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JList list = new JList();
-		list.setBounds(192, 70, 416, 369);
-		contentPane.add(list);
+		textList = new JList();
+		textList.setBounds(192, 70, 416, 369);
+		contentPane.add(textList);
 		
 		JButton btnNewButton = new JButton("Add +");
 		btnNewButton.setBounds(645, 70, 117, 29);
@@ -58,16 +81,27 @@ public class MainFrame extends JFrame {
 		JButton btnNewButton_1 = new JButton("Load =");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new LoadController(MainFrame.this).load();
 			}
 		});
 		btnNewButton_1.setBounds(645, 134, 117, 29);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Edit *");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new EditController(MainFrame.this).edit();
+			}
+		});
 		btnNewButton_2.setBounds(645, 203, 117, 29);
 		contentPane.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Remove -");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new RemoveController(MainFrame.this).remove();
+			}
+		});
 		btnNewButton_3.setBounds(645, 267, 117, 29);
 		contentPane.add(btnNewButton_3);
 		
@@ -79,12 +113,22 @@ public class MainFrame extends JFrame {
 		btnNewButton_4.setBounds(6, 126, 177, 29);
 		contentPane.add(btnNewButton_4);
 		
-		JTextPane txtpnCalendar = new JTextPane();
-		txtpnCalendar.setEditable(false);
-		txtpnCalendar.setText("Calendar");
-		txtpnCalendar.setBounds(192, 26, 416, 32);
-		contentPane.add(txtpnCalendar);
+
+
+		this.objectField = new JTextPane();
+		objectField.setEditable(false);
+		objectField.setText("Calendar");
+		objectField.setBounds(192, 26, 208, 32);
+		contentPane.add(objectField);
 		
+		this.valueField = new JTextPane();
+		valueField.setEditable(false);
+		valueField.setText("All");
+		valueField.setBounds(399, 26, 208, 32);
+		contentPane.add(valueField);
+		
+
+
 		JButton btnShowAllCalendars = new JButton("Show All Calendars");
 		btnShowAllCalendars.setBounds(6, 70, 177, 29);
 		contentPane.add(btnShowAllCalendars);
@@ -114,5 +158,15 @@ public class MainFrame extends JFrame {
 		contentPane.add(btnNewButton_7);
 		
 		
+		
+		
+	}
+
+	public String getString(JTextPane field) {
+		return field.getText();
+	}
+
+	public void setString(JTextPane field, String value) {
+		field.setText(value);
 	}
 }

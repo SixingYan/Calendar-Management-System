@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -10,13 +11,30 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AddCalendarDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField txtPersonal;
+	private JTextField nameField;
 
+	private Boolean updated = false;
+
+	public JComboBox durationComboBox;
+	private JTextField startYearField;
+	private JTextField startMonthField;
+	private JTextField startDayField;
+	private JTextField startDoWField;
+	private JTextField endYearField;
+	private JTextField endMonthField;
+	private JTextField endDayField;
+	private JTextField endDoWField;
+	private JTextField earlyField;
+	private JTextField lateField;
+	
+	private JButton okButton;
+	private JButton cancelButton;
 	/**
 	 * Launch the application.
 	 */
@@ -40,57 +58,74 @@ public class AddCalendarDialog extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		{
-			textField = new JTextField();
-			textField.setText("2018");
-			textField.setBounds(100, 88, 66, 26);
-			contentPanel.add(textField);
-			textField.setColumns(10);
+		
+			startYearField = new JTextField();
+			startYearField.setText("2018");
+			startYearField.setBounds(100, 88, 66, 26);
+			contentPanel.add(startYearField);
+			startYearField.setColumns(10);
 			
-			textField = new JTextField();
-			textField.setText("09");
-			textField.setColumns(10);
-			textField.setBounds(217, 88, 66, 26);
-			contentPanel.add(textField);
+			startMonthField = new JTextField();
+			startMonthField.setText("09");
+			startMonthField.setColumns(10);
+			startMonthField.setBounds(217, 88, 66, 26);
+			contentPanel.add(startMonthField);
 			
-			textField = new JTextField();
-			textField.setText("24");
-			textField.setColumns(10);
-			textField.setBounds(330, 88, 66, 26);
-			contentPanel.add(textField);
+			startDayField = new JTextField();
+			startDayField.setText("24");
+			startDayField.setColumns(10);
+			startDayField.setBounds(330, 88, 66, 26);
+			contentPanel.add(startDayField);
 			
-			textField = new JTextField();
-			textField.setText("2018");
-			textField.setBounds(100, 148, 66, 26);
-			contentPanel.add(textField);
-			textField.setColumns(10);
+			startDoWField = new JTextField();
+			startDoWField.setText("3");
+			startDoWField.setBounds(100, 148, 66, 26);
+			contentPanel.add(startDoWField);
+			startDoWField.setColumns(10);
 			
-			textField = new JTextField();
-			textField.setText("10");
-			textField.setColumns(10);
-			textField.setBounds(217, 148, 66, 26);
-			contentPanel.add(textField);
+			endYearField = new JTextField();
+			endYearField.setText("2018");
+			endYearField.setBounds(100, 148, 66, 26);
+			contentPanel.add(endYearField);
+			endYearField.setColumns(10);
+
+			endMonthField = new JTextField();
+			endMonthField.setText("10");
+			endMonthField.setColumns(10);
+			endMonthField.setBounds(217, 148, 66, 26);
+			contentPanel.add(endMonthField);
 			
-			textField = new JTextField();
-			textField.setText("01");
-			textField.setColumns(10);
-			textField.setBounds(330, 148, 66, 26);
-			contentPanel.add(textField);
+			endDayField = new JTextField();
+			endDayField.setText("01");
+			endDayField.setColumns(10);
+			endDayField.setBounds(330, 148, 66, 26);
+			contentPanel.add(endDayField);
+
+			endDoWField = new JTextField();
+			endDoWField.setText("1");
+			endDoWField.setColumns(10);
+			endDoWField.setBounds(330, 148, 66, 26);
+			contentPanel.add(endDoWField);
 			
 			
-			textField = new JTextField();
-			textField.setText("1000");
-			textField.setColumns(10);
-			textField.setBounds(100, 194, 66, 26);
-			contentPanel.add(textField);
+			earlyField = new JTextField();
+			earlyField.setText("1000");
+			earlyField.setColumns(10);
+			earlyField.setBounds(100, 194, 66, 26);
+			contentPanel.add(earlyField);
 			
-			textField = new JTextField();
-			textField.setText("1700");
-			textField.setColumns(10);
-			textField.setBounds(263, 194, 66, 26);
-			contentPanel.add(textField);
+			lateField = new JTextField();
+			lateField.setText("1700");
+			lateField.setColumns(10);
+			lateField.setBounds(263, 194, 66, 26);
+			contentPanel.add(lateField);
 			
-		}
+			nameField = new JTextField();
+			nameField.setText("Personal");
+			nameField.setBounds(122, 25, 130, 26);
+			contentPanel.add(nameField);
+			nameField.setColumns(10);
+			
 		{
 			JLabel lblNewLabel = new JLabel("Calendar Name");
 			lblNewLabel.setBounds(6, 30, 114, 16);
@@ -104,11 +139,7 @@ public class AddCalendarDialog extends JDialog {
 			contentPanel.add(lblNewLabel_1);
 		}
 		{
-			txtPersonal = new JTextField();
-			txtPersonal.setText("Personal");
-			txtPersonal.setBounds(122, 25, 130, 26);
-			contentPanel.add(txtPersonal);
-			txtPersonal.setColumns(10);
+			
 		}
 		{
 			JLabel lblNewLabel_2 = new JLabel("Start from");
@@ -157,28 +188,90 @@ public class AddCalendarDialog extends JDialog {
 		}
 		{
 			JLabel lblNewLabel_10 = new JLabel("Duration");
-			lblNewLabel_10.setBounds(335, 30, 61, 16);
+			lblNewLabel_10.setBounds(286, 30, 61, 16);
 			contentPanel.add(lblNewLabel_10);
 		}
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(392, 26, 52, 27);
+		comboBox.setBounds(359, 26, 85, 27);
 		contentPanel.add(comboBox);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						updated = true;
+						AddCalendarDialog.this.setVisible(false);
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
+				
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						updated = false;
+						AddCalendarDialog.this.setVisible(false);
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
 		}
 	}
+
+	public Boolean wasUpdated() {
+		return updated;
+	}
+
+	public JComboBox getDurationComboBox() {
+		return durationComboBox;
+	}
+
+	public JTextField getStartYearField() {
+		return startYearField;
+	}
+
+	public JTextField getStartMonthField() {
+		return startMonthField;
+	}
+
+	public JTextField getStartDayField() {
+		return startDayField;
+	}
+
+	public JTextField getStartDoWField() {
+		return startDoWField;
+	}
+
+	public JTextField getEndYearField() {
+		return endYearField;
+	}
+
+	public JTextField getEndMonthField() {
+		return endMonthField;
+	}
+
+	public JTextField getEndDayField() {
+		return endDayField;
+	}
+
+	public JTextField getEndDoWField() {
+		return endDoWField;
+	}
+
+	public JTextField getEarlyField() {
+		return earlyField;
+	}
+
+	public JTextField getLateField() {
+		return lateField;
+	}
+
 }

@@ -3,49 +3,46 @@ package model;
 import java.util.Hashtable;
 
 public class Calendar {
-	int startDateDigit; // YYYYMMDD
-	int endDateDigit; // YYYYMMDD
+	int start; // YYYYMMDD
+	int end; // YYYYMMDD
 	int duration;
-	int earlyTimeDigit; //HHMM
-	int lateTimeDigit; //HHMM
-	Hashtable <Integer,Timeplot> tManager = new Hashtable<>();
+	int early; //HHMM
+	int late; //HHMM
+	Hashtable <Integer,Timeplot> timeplotMgr = new Hashtable<>();
 	String name;
 	String detail;
 
-	public Calendar (String name, int startDateDigit, int endDateDigit, 
-					int duration, int earlyTimeDigit, int lateTimeDigit) {
-		this.startDateDigit = startDateDigit; // YYYYMMDD
-		this.endDateDigit = endDateDigit;
+	public Calendar (String name, int start, int end, 
+					int duration, int early, int late) {
+		this.start = start; // YYYYMMDD
+		this.end = end;
 		this.duration = duration;
-		this.earlyTimeDigit = earlyTimeDigit;
-		this.lateTimeDigit = lateTimeDigit;
+		this.early = early;
+		this.late = late;
 		this.name = name;
 		this.detail = getDetail();
-		for (int d=startDateDigit; d < endDateDigit+1; d++) 
-			this.tManager.put(d, new Timeplot(d, duration, earlyTimeDigit, lateTimeDigit, this.detail));
-		
-		//this.tManager = new TimeplotManager(startDateDigit, endDateDigit, duration, earliestTimeDigit, latestTimeDigit);
+		for (int d=start; d < end+1; d++) 
+			this.timeplotMgr.put(d, new Timeplot(d, duration, early, late, this.detail));
 	}
 
 	public String getRangeDateStr() {
-		return String.valueOf(this.startDateDigit) + "-" + String.valueOf(this.endDateDigit);
+		return String.valueOf(this.start) + "-" + String.valueOf(this.end);
 	}
 
-	public void addDay(int dateDigit) {
-		if (!this.tManager.contains(dateDigit)) {
-			Timeplot t = new Timeplot(dateDigit, this.duration, this.earliestTimeDigit, this.latestTimeDigit);
-			this.tManager.put(dateDigit, t);
-		}
+	public Timeplot addDay(int dateDigit) {
+		Timeplot t = new Timeplot(dateDigit, this.duration, this.earliestTimeDigit, this.latestTimeDigit);
+		this.timeplotMgr.put(dateDigit, t);
+		return t;
 	}
 
 	public void removeDay(int dateDigit) {
-		if (this.tManager.contains(dateDigit)) {
-			tManager.remove(dateDigit);
+		if (this.timeplotMgr.contains(dateDigit)) {
+			timeplotMgr.remove(dateDigit);
 		}
 	}
 	
-	public String getDetail() {
-		return this.name + " " + getRangeDateStr();
+	public String getString() {
+		return //this.name + " " + getRangeDateStr();
 	}
 	
 	public int getDuration() {
@@ -56,12 +53,12 @@ public class Calendar {
 		return name;
 	}
 
-	public int getStartDateDigit() {
-		return startDateDigit;
+	public int getstart() {
+		return start;
 	}
 
-	public int getEndDateDigit() {
-		return endDateDigit;
+	public int getend() {
+		return end;
 	}
 	
 }
