@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.AddController;
+import controller.CloseController;
 import controller.LoadController;
 import controller.QuitController;
 import controller.RemoveController;
@@ -23,6 +24,7 @@ import javax.swing.DefaultListModel;
 
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
@@ -33,6 +35,8 @@ public class MainFrame extends JFrame {
 
 	private JPanel contentPane;
 	public Hashtable<String, Calendar> curCalendarMgr;// = new Hashtable<>();
+	public ArrayList<String> closeDateList = new ArrayList<>();
+	public ArrayList<String> closeTimeList = new ArrayList<>(); 
 	public String curCalendar;
 	public String curTimeplot;
 	public String curMeeting;
@@ -144,6 +148,7 @@ public class MainFrame extends JFrame {
 		JButton btnCloseTimeplot = new JButton("Close Timeplot");
 		btnCloseTimeplot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new CloseController(MainFrame.this).close();
 			}
 		});
 		btnCloseTimeplot.setBounds(6, 202, 177, 29);
@@ -160,16 +165,8 @@ public class MainFrame extends JFrame {
 				}
 			}
 		});
-		btnNewButton_5.setBounds(6, 338, 117, 29);
+		btnNewButton_5.setBounds(6, 379, 117, 29);
 		contentPane.add(btnNewButton_5);
-		
-		JButton btnNew = new JButton("New");
-		btnNew.setBounds(6, 297, 117, 29);
-		contentPane.add(btnNew);
-		
-		JButton btnNewButton_6 = new JButton("Load");
-		btnNewButton_6.setBounds(6, 379, 117, 29);
-		contentPane.add(btnNewButton_6);
 		
 		JButton btnNewButton_7 = new JButton("Quit");
 		btnNewButton_7.addActionListener(new ActionListener() {
@@ -182,12 +179,15 @@ public class MainFrame extends JFrame {
 		
 	}
 	
-	public MainFrame(Hashtable<String, Calendar> calendarMgr) {
+	public MainFrame(Hashtable<String, Calendar> calendarMgr, ArrayList<String> closeDateList, ArrayList<String> closeTimeList) {
 		this();
 		this.curCalendarMgr = calendarMgr;
 		if (!this.curCalendarMgr.isEmpty()){
 			new ShowController(MainFrame.this).ShowCalendars();
 		}
+		this.closeDateList = closeDateList;
+		this.closeTimeList = closeTimeList;
+
 	}
 	
 	public String getString(JTextPane field) {

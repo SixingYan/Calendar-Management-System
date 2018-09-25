@@ -47,13 +47,6 @@ public class SelectNameDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
-			JComboBox comboBox = new JComboBox();
-			comboBox.setEnabled(false);
-			// comboBox.setEnabled(false);
-			comboBox.setBounds(307, 109, 119, 27);
-			contentPanel.add(comboBox);
-		}
-		{
 			JLabel lblNewLabel = new JLabel("Enter Calendar Name");
 			lblNewLabel.setBounds(16, 113, 147, 16);
 			contentPanel.add(lblNewLabel);

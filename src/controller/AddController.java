@@ -95,17 +95,21 @@ public class AddController {
 			String year = atd.getYearField().getText();
 			String month = atd.getMonthField().getText();
 			String day = atd.getDayField().getText();
-			String curCalName = this.frame.curCalendar;
+			String date = year + month + day;
 
-			// update the calendar mgr
-			Calendar c = this.frame.curCalendarMgr.get(curCalName);
-			Timeplot t = c.addDay(year+month+day);
-			this.frame.curCalendarMgr.put(curCalName, c);
+			if (!this.frame.closeDateList.contains(date)){
+				String curCalName = this.frame.curCalendar;
 
-			// update the JList
-			this.frame.textModel.clear();
-			for(Iterator<String> itr = c.timeplotMgr.keySet().iterator(); itr.hasNext();)
-				this.frame.textModel.addElement(t.meetingMgr.get(itr.next()).getString());
+				// update the calendar mgr
+				Calendar c = this.frame.curCalendarMgr.get(curCalName);
+				c.addDay(date);
+				this.frame.curCalendarMgr.put(curCalName, c);
+
+				// update the JList
+				this.frame.textModel.clear();
+				for(Iterator<String> itr = c.timeplotMgr.keySet().iterator(); itr.hasNext();)
+					this.frame.textModel.addElement(c.timeplotMgr.get(itr.next()).getString());
+			}
 		}
 		atd.dispose();
 		frame.repaint();
@@ -118,24 +122,27 @@ public class AddController {
 		amd.setVisible(true);
 
 		if (amd.wasUpdated()) {
-			System.out.println("out1");
 			String time = amd.getTimeField().getText();
-			String location = amd.getLocationField().getText();
-			
-			System.out.println("out2");
+
+			if (!this.frame.closeTimeList.contains(time)){
+
+				String location = amd.getLocationField().getText();
 			
 			// update the calendar mgr
-			Calendar c = this.frame.curCalendarMgr.get(this.frame.curCalendar);
-			Timeplot t = c.timeplotMgr.get(this.frame.curTimeplot);
-			Meeting m = new Meeting(c.duration,time, location, amd.people);
-			t.meetingMgr.put(time, m);
-			c.timeplotMgr.put(this.frame.curTimeplot, t);
-			this.frame.curCalendarMgr.put(this.frame.curCalendar, c);
-			System.out.println("out3");
+				Calendar c = this.frame.curCalendarMgr.get(this.frame.curCalendar);
+				Timeplot t = c.timeplotMgr.get(this.frame.curTimeplot);
+				if (t.getStatus()){
+					Meeting m = new Meeting(c.duration,time, location, amd.people);
+				t.meetingMgr.put(time, m);
+				c.timeplotMgr.put(this.frame.curTimeplot, t);
+				this.frame.curCalendarMgr.put(this.frame.curCalendar, c);
 			// update the JList
-			this.frame.textModel.clear();
-			for(Iterator<String> itr = t.meetingMgr.keySet().iterator(); itr.hasNext();)
-				this.frame.textModel.addElement(t.meetingMgr.get(itr.next()).getString());
+				this.frame.textModel.clear();
+				for(Iterator<String> itr = t.meetingMgr.keySet().iterator(); itr.hasNext();)
+					this.frame.textModel.addElement(t.meetingMgr.get(itr.next()).getString());
+				}
+			}
+			
 		}
 		amd.dispose();
 		frame.repaint();

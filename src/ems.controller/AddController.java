@@ -97,7 +97,7 @@ public class AddController {
 
 			// update the calendar mgr
 			Calendar c = this.frame.curCalendarMgr.get(curCalName);
-			Timeplot t = c.addDay(year+month+day);
+			c.addDay(year+month+day);
 			this.frame.curCalendarMgr.put(curCalName, c);
 
 			// update the JList
@@ -126,7 +126,7 @@ public class AddController {
 			for (int i=0;i< peopleList.getSize();i++)
 				people.add(peopleList.getElementAt(i));
 			
-			Meeting m = new Meeting(time, location, people);
+			//Meeting m = new Meeting(time, location, people);
 			
 			// update the calendar mgr
 			Calendar c = this.frame.curCalendarMgr.get(this.frame.curCalendar);

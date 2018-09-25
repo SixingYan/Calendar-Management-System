@@ -69,7 +69,7 @@ public class AddTimeplotDialog extends JDialog {
 		}
 		{
 			dayField = new JTextField();
-			dayField.setText("11");
+			dayField.setText("05");
 			dayField.setBounds(383, 98, 61, 26);
 			contentPanel.add(dayField);
 			dayField.setColumns(10);
@@ -95,6 +95,7 @@ public class AddTimeplotDialog extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						updated = true;
+						AddTimeplotDialog.this.setVisible(false);
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -106,6 +107,7 @@ public class AddTimeplotDialog extends JDialog {
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						updated = false;
+						AddTimeplotDialog.this.setVisible(false);
 					}
 				});
 				cancelButton.setActionCommand("Cancel");

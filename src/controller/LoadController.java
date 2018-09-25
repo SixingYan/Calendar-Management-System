@@ -44,7 +44,7 @@ public class LoadController {
 
 			this.frame.curCalendar = name;
 			this.frame.objectField.setText("Timeplots");
-			this.frame.valueField.setText(name); 
+			this.frame.valueField.setText(this.frame.curCalendar); 
 
 			this.frame.textModel.clear();
 			for(Iterator<String> itr = c.timeplotMgr.keySet().iterator(); itr.hasNext();)
@@ -69,7 +69,8 @@ public class LoadController {
 			
 			this.frame.curTimeplot = date;
 			this.frame.objectField.setText("Meetings");
-			this.frame.valueField.setText(year+month+day); 
+			this.frame.valueField.setText(this.frame.curTimeplot); 
+			
 			this.frame.textModel.clear();
 			if (!t.meetingMgr.isEmpty())
 				for(Iterator<String> itr = t.meetingMgr.keySet().iterator(); itr.hasNext();)
@@ -83,18 +84,16 @@ public class LoadController {
 		SelectTimeDialog std = new SelectTimeDialog();
 		std.setModal(true);
 		std.setVisible(true);
-		System.out.print("out1");
+		
 		if (std.wasUpdated()) {
 			String time = std.getTimeField().getText();
 			Calendar c = this.frame.curCalendarMgr.get(this.frame.curCalendar);
 			Timeplot t = c.timeplotMgr.get(this.frame.curTimeplot);
-			System.out.print("out2");
 			Meeting m = t.meetingMgr.get(time);
-			System.out.print("out3");
+			
 			this.frame.curMeeting = time;
 			this.frame.objectField.setText("Meeting");
 			this.frame.valueField.setText(time);
-			System.out.print("out4");
 			this.frame.textModel.clear();
 			for(int i=0; i < m.people.size(); i++)
 				this.frame.textModel.addElement(m.people.get(i));

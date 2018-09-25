@@ -46,7 +46,6 @@ public class AddMeetingDialog extends JDialog {
 	
 	Meeting m;
 	boolean updated = false;
-	private JTextField textField;
 	private JTextField textField_1;
 	/**
 	 * Create the dialog.
@@ -58,11 +57,6 @@ public class AddMeetingDialog extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-
-		JLabel selectCalendarLable = new JLabel("Select Calendar");
-		selectCalendarLable.setEnabled(false);
-		selectCalendarLable.setBounds(6, 18, 101, 16);
-		contentPanel.add(selectCalendarLable);
 		
 		JLabel selectTimeLable = new JLabel("Select Time");
 		selectTimeLable.setBounds(6, 46, 79, 16);
@@ -111,14 +105,6 @@ public class AddMeetingDialog extends JDialog {
 			locationField.setBounds(163, 68, 130, 26);
 			contentPanel.add(locationField);
 			locationField.setColumns(10);
-		}
-		{
-			textField = new JTextField();
-			textField.setEditable(false);
-			textField.setEnabled(false);
-			textField.setBounds(163, 13, 130, 26);
-			contentPanel.add(textField);
-			textField.setColumns(10);
 		}
 		{
 			timeField = new JTextField();

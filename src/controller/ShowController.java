@@ -40,10 +40,11 @@ public class ShowController {
 			String day = sdd.getDayField().getText();
 
 			String date = year + month + day;
+
 			for(Iterator<String> itr = this.frame.curCalendarMgr.keySet().iterator(); itr.hasNext();){
 				Calendar c = this.frame.curCalendarMgr.get(itr.next());
 				if (toInt(date) >= toInt(c.start) & toInt(date) <= toInt(c.end)) {
-					if (c.timeplotMgr.contains(date)){
+					if (c.timeplotMgr.containsKey(date)){
 					 	Timeplot t = c.timeplotMgr.get(date);
 					 	if (!t.meetingMgr.isEmpty()){
 					 		for(Iterator<String> ky = t.meetingMgr.keySet().iterator(); ky.hasNext();){
@@ -53,6 +54,8 @@ public class ShowController {
 					}
 				}
 			}
+			this.frame.objectField.setText("Meeting");
+			this.frame.valueField.setText(date);
 		}
 		sdd.dispose();
 		frame.repaint();
@@ -68,13 +71,11 @@ public class ShowController {
 			this.frame.textModel.clear();
 			String year = sdd.getYearField().getText();
 			String month = sdd.getMonthField().getText();
-			
 			for(Iterator<String> itr = this.frame.curCalendarMgr.keySet().iterator(); itr.hasNext();){
 				Calendar c = this.frame.curCalendarMgr.get(itr.next());
 				if (c.start.startsWith(year+month)) {
 					for (Iterator<String> tky = c.timeplotMgr.keySet().iterator(); tky.hasNext();){
 						Timeplot t = c.timeplotMgr.get(tky.next()); 
-
 						for (Iterator<String> mky = t.meetingMgr.keySet().iterator(); mky.hasNext();){
 							String m = t.meetingMgr.get(mky.next()).getString();
 							this.frame.textModel.addElement(m);
@@ -82,6 +83,8 @@ public class ShowController {
 					}
 				}
 			}
+			this.frame.objectField.setText("Meeting");
+			this.frame.valueField.setText(year+month);
 		}
 		sdd.dispose();
 		frame.repaint();

@@ -83,6 +83,7 @@ public class AddCalendarDialog extends JDialog {
 			startDoWField.setBounds(100, 148, 66, 26);
 			contentPanel.add(startDoWField);
 			startDoWField.setColumns(10);
+			startDoWField.setVisible(false);
 			
 			endYearField = new JTextField();
 			endYearField.setText("2018");
@@ -107,7 +108,7 @@ public class AddCalendarDialog extends JDialog {
 			endDoWField.setColumns(10);
 			endDoWField.setBounds(330, 148, 66, 26);
 			contentPanel.add(endDoWField);
-			
+			endDoWField.setVisible(false);
 			
 			earlyField = new JTextField();
 			earlyField.setText("1000");

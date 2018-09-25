@@ -22,26 +22,11 @@ public class Timeplot implements Serializable{
 		this.duration = duration;
 		this.early = early;
 		this.late = late;
-		//prepareEmptyTime();
 		this.meetingMgr = new Hashtable<>();
 	}
 	
 	public int toInt(String number) {
 		return Integer.valueOf(number).intValue();
-	}
-	
-	public void prepareEmptyTime () {
-		int index;
-		if (this.duration.equals("10")) index = 0;
-		else if (this.duration.equals("15")) index = 1;
-		else if (this.duration.equals("20")) index = 2;
-		else if (this.duration.equals("30")) index = 3;
-		else index = 4;
-
-		for (int i=toInt(this.early); i<= toInt(this.late);i++) {
-			for (String mm : this.availStartMM[index])
-				this.emptyTime.add(String.valueOf(i)+mm);
-		}
 	}
 
 	public void removeEmptyTime(String time) {
@@ -57,7 +42,7 @@ public class Timeplot implements Serializable{
 	}
 
 	public String getString() {
-		return String.valueOf(this.date) + ": " + String.valueOf(this.early) + " " + String.valueOf(this.late);
+		return String.valueOf(this.date) + ": " + String.valueOf(this.early) + " " + String.valueOf(this.late) + getStatusStr();
 	}
 
 	public String getTimeRangeStr() {
@@ -66,9 +51,12 @@ public class Timeplot implements Serializable{
 	public Boolean getStatus() {
 		return this.status;
 	}
-	public Boolean wasFull() {
-		if (meetingMgr.size() == maxNumber)
-			return true;
-		return false;
+	public String getStatusStr() {
+		if (this.status) return "  activated";
+		return "  closed";
+	}
+
+	public void close(){
+		this.status = false;
 	}
 }

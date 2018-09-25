@@ -18,7 +18,7 @@ public class SelectDateDialog extends JDialog {
 	private JTextField yearField;
 	private JTextField monthField;
 	private JTextField dayField;
-	private Boolean updated = false;
+	private Boolean updated=false;
 	public Boolean wasUpdated() {
 		return updated;
 	}

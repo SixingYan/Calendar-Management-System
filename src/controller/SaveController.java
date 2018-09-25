@@ -14,7 +14,9 @@ public class SaveController {
 
 	public void save() throws IOException {
 		SerializableStorage ss = new SerializableStorage();
-		ss.save(this.frame.curCalendarMgr);
+		ss.saveMgr(this.frame.curCalendarMgr);
+		ss.saveCD(this.frame.closeDateList);
+		ss.saveCT(this.frame.closeTimeList);
 	}
 	
 }
