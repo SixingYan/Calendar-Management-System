@@ -61,7 +61,7 @@ public class SelectDateDialog extends JDialog {
 		contentPanel.add(lblNewLabel_1);
 		
 		monthField = new JTextField();
-		monthField.setText("10");
+		monthField.setText("09");
 		monthField.setBounds(225, 102, 61, 26);
 		contentPanel.add(monthField);
 		monthField.setColumns(10);
@@ -71,7 +71,7 @@ public class SelectDateDialog extends JDialog {
 		contentPanel.add(lblNewLabel_2);
 		
 		dayField = new JTextField();
-		dayField.setText("11");
+		dayField.setText("27");
 		dayField.setBounds(371, 102, 61, 26);
 		contentPanel.add(dayField);
 		dayField.setColumns(10);
@@ -83,6 +83,8 @@ public class SelectDateDialog extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						updated = true;
+						SelectDateDialog.this.setVisible(false);
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -93,6 +95,8 @@ public class SelectDateDialog extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						updated = false;
+						SelectDateDialog.this.setVisible(false);
 					}
 				});
 				cancelButton.setActionCommand("Cancel");

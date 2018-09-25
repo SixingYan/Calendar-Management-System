@@ -1,21 +1,27 @@
 package ems;
 
+import java.io.IOException;
+import java.util.Hashtable;
+
 import model.Calendar;
+import storage.SerializableStorage;
+import view.MainFrame;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
-		
+		Hashtable<String, Calendar> calendarMgr;
 		// load or new data
 		SerializableStorage ss = new SerializableStorage();
-		Hashtable<String, Calendar> calendarMgr = ss.read();
+		if (ss.exist())
+			calendarMgr = ss.read();
+		else
+			calendarMgr = new Hashtable<>();
+		MainFrame frame = new MainFrame (calendarMgr);
 
-		// create panel
+		frame.setVisible(true);
 
-		MainFrame frame = new MainFrame(calendarMgr);
-
-		// load exist data
 	}
 
 }

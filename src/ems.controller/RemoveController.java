@@ -1,5 +1,6 @@
-package controller;
 
+
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import model.Calendar;
@@ -21,11 +22,11 @@ public class RemoveController {
 		String object = this.frame.getString(frame.objectField);
 		String value = this.frame.getString(frame.valueField);
 
-		if (object.equals("Calendars") & value.equals("All"))
+		if (object.equals("calendars") & value.equals("all"))
 			removeCalendar();
-		else if (object.equals("Timeplots"))
+		else if (object.equals("timeplots"))
 			removeTimeplot();
-		else if (object.equals("Meetings"))
+		else if (object.equals("meetings"))
 			removeMeeting();
 		else ;
 	}
@@ -88,8 +89,10 @@ public class RemoveController {
 			this.frame.textModel.clear();
 			for(Iterator<String> itr = t.meetingMgr.keySet().iterator(); itr.hasNext();)
 				this.frame.textModel.addElement(t.meetingMgr.get(itr.next()).getString());
+
 		}
 		std.dispose();
+
 		frame.repaint();
 	}
 
@@ -111,9 +114,9 @@ public class RemoveController {
 			this.frame.textModel.clear();
 			for (int i=0; i< m.people.size(); i++)
 				this.frame.textModel.addElement(m.people.get(i));
+
 		}
 		sbd.dispose();
 		frame.repaint();
 	}
 }
-

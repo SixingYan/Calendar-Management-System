@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -15,6 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JList;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class AddMeetingDialog extends JDialog {
@@ -23,9 +25,11 @@ public class AddMeetingDialog extends JDialog {
 	private JTextField nameField;
 	private JTextField locationField;
 	private JTextField timeField;
-	private JList personList;
 	private JButton okButton;
 	private JButton cancelButton;
+	public ArrayList<String> people = new ArrayList<>();
+	public DefaultListModel textModel = new DefaultListModel();
+	public JList personList = new JList(textModel);
 	
 	/**
 	 * Launch the application.
@@ -78,11 +82,21 @@ public class AddMeetingDialog extends JDialog {
 		}
 		{
 			JButton btnNewButton = new JButton("Add +");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String name = getNameField().getText();
+					people.add(name);
+					textModel.clear();
+					for (String p:people)
+						textModel.addElement(p);
+					getNameField().setText(null);
+				}
+			});
 			btnNewButton.setBounds(297, 101, 117, 29);
 			contentPanel.add(btnNewButton);
 		}
 		{
-			personList = new JList();
+			//personList = new JList();
 			personList.setBounds(6, 134, 537, 116);
 			contentPanel.add(personList);
 		}

@@ -19,9 +19,9 @@ public class AddCalendarDialog extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField nameField;
 
-	private Boolean updated = false;
+	public Boolean updated = false;
 
-	public JComboBox durationComboBox;
+	public JComboBox<Integer> durationComboBox;
 	private JTextField startYearField;
 	private JTextField startMonthField;
 	private JTextField startDayField;
@@ -52,6 +52,7 @@ public class AddCalendarDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public AddCalendarDialog() {
+		System.out.print("Do it ?");
 		setTitle("Create A New Calendar");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -139,9 +140,6 @@ public class AddCalendarDialog extends JDialog {
 			contentPanel.add(lblNewLabel_1);
 		}
 		{
-			
-		}
-		{
 			JLabel lblNewLabel_2 = new JLabel("Start from");
 			lblNewLabel_2.setBounds(6, 58, 114, 16);
 			contentPanel.add(lblNewLabel_2);
@@ -192,14 +190,14 @@ public class AddCalendarDialog extends JDialog {
 			contentPanel.add(lblNewLabel_10);
 		}
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(359, 26, 85, 27);
-		contentPanel.add(comboBox);
-		{
+		durationComboBox = new JComboBox<>();
+		durationComboBox.setBounds(359, 26, 85, 27);
+		contentPanel.add(durationComboBox);
+		
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
+			
 				okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -211,8 +209,7 @@ public class AddCalendarDialog extends JDialog {
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 				
-			}
-			{
+			
 				cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -222,15 +219,15 @@ public class AddCalendarDialog extends JDialog {
 				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
-			}
-		}
+			
+		
 	}
 
 	public Boolean wasUpdated() {
 		return updated;
 	}
 
-	public JComboBox getDurationComboBox() {
+	public JComboBox<Integer> getDurationComboBox() {
 		return durationComboBox;
 	}
 

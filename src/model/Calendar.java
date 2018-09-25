@@ -1,48 +1,80 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Hashtable;
 
-public class Calendar {
-	int start; // YYYYMMDD
-	int end; // YYYYMMDD
-	int duration;
-	int early; //HHMM
-	int late; //HHMM
-	public Hashtable <Integer,Timeplot> timeplotMgr = new Hashtable<>();
+public class Calendar implements Serializable{
+	public String start; // YYYYMMDD
+	public String end; // YYYYMMDD
+	public String duration;
+	public String early; //HHMM
+	public String late; //HHMM
+	public Hashtable <String,Timeplot> timeplotMgr = new Hashtable<>();
 	public String name;
-	//String detail;
 
-	public Calendar (String name, int start, int end, 
-					int duration, int early, int late) {
+	public Calendar (String name, String start, String end, 
+			String duration, String early, String late) {
 		this.start = start; // YYYYMMDD
 		this.end = end;
 		this.duration = duration;
 		this.early = early;
 		this.late = late;
 		this.name = name;
-		for (int d=start; d < end+1; d++) 
-			this.timeplotMgr.put(d, new Timeplot(d, duration, early, late));
+		// here deal with date
+		String key;
+		for (int d=toInt(start.substring(7, 8)); d < 31; d ++) {
+			if (d < 10)
+				key = start.substring(0, 6) + "0" + String.valueOf(d);
+			else
+				key = start.substring(0, 6) + String.valueOf(d);
+			this.timeplotMgr.put(key, new Timeplot(key, duration, early, late));
+		}
+		for (int d=toInt(start.substring(0, 6))+1; d < toInt(end.substring(0, 5)); d++)
+			for (int i=0; i< 31; i++) {
+				if (i < 10)
+					key = String.valueOf(d) + "0" + String.valueOf(i);
+				else
+					key = String.valueOf(d) + String.valueOf(i);
+				this.timeplotMgr.put(key, new Timeplot(key, duration, early, late));
+		}
+		for (int d=0; d<toInt(end.substring(6, 7)); d++) {
+			if (d<10)
+				key = String.valueOf(end.substring(0,6)) + "0" + String.valueOf(d);
+			else
+				key = String.valueOf(end.substring(0,6)) + String.valueOf(d);
+			
+			this.timeplotMgr.put(key, new Timeplot(key, duration, early, late));
+		}
 	}
+	public int toInt(String number) {
+		return Integer.valueOf(number).intValue();
+	}
+	public int getNumber() {
+		return timeplotMgr.size();
+	}
+
 	public String getString() {
 		return name + " " + getRangeDateStr();
 	}
+
+
 	public String getRangeDateStr() {
 		return String.valueOf(this.start) + "-" + String.valueOf(this.end);
 	}
 
-	public Timeplot addDay(int dateDigit) {
+	public Timeplot addDay(String dateDigit) {
 		Timeplot t = new Timeplot(dateDigit, this.duration, this.early, this.late);
 		this.timeplotMgr.put(dateDigit, t);
 		return t;
 	}
 
-	public void removeDay(int dateDigit) {
+	public void removeDay(String dateDigit) {
 		if (this.timeplotMgr.contains(dateDigit)) {
 			timeplotMgr.remove(dateDigit);
 		}
 	}
 	
-	public int getDuration() {
+	public String getDuration() {
 		return duration;
 	}
 
@@ -50,11 +82,11 @@ public class Calendar {
 		return name;
 	}
 
-	public int getstart() {
+	public String getstart() {
 		return start;
 	}
 
-	public int getend() {
+	public String getend() {
 		return end;
 	}
 	

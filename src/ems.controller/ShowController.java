@@ -1,4 +1,4 @@
-package controller;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,45 +14,42 @@ public class ShowController {
 	public ShowController (MainFrame frame) {
 		this.frame = frame;
 	}
-	
 	public int toInt(String number) {
 		return Integer.valueOf(number).intValue();
 	}
-	
 	public void ShowCalendars() {
-		this.frame.objectField.setText("Calendars");
-		this.frame.valueField.setText("All"); 
-		this.frame.textModel.clear();
-		for(Iterator<String> cky = this.frame.curCalendarMgr.keySet().iterator(); cky.hasNext();)
-			this.frame.textModel.addElement(this.frame.curCalendarMgr.get(cky.next()).getString());
+		ArrayList<String> cList = new ArrayList<>(); 
+		for(Iterator<String> cky = this.frame.curCalendarMgr.keySet().iterator(); cky.hasNext();){
+			cList.add(this.frame.curCalendarMgr.get(cky.next()).getString());
+		}
+		this.frame.textList.setListData((String[]) cList.toArray());
 		this.frame.repaint();
 	}
 
 	public void ShowDate() {
 		SelectDateDialog sdd = new SelectDateDialog();
-		sdd.setModal(true);
-		sdd.setVisible(true);
-		
 		if (sdd.wasUpdated()) {
-			this.frame.textModel.clear();
+			ArrayList<String> mList = new ArrayList<>(); 
 			String year = sdd.getYearField().getText();
 			String month = sdd.getMonthField().getText();
 			String day = sdd.getDayField().getText();
 
-			String date = year + month + day;
+			int date = Integer.valueOf(year+month+day).intValue();
+			// for each calendar, whether it has the day
 			for(Iterator<String> itr = this.frame.curCalendarMgr.keySet().iterator(); itr.hasNext();){
 				Calendar c = this.frame.curCalendarMgr.get(itr.next());
-				if (toInt(date) >= toInt(c.start) & toInt(date) <= toInt(c.end)) {
+				if (date >= toInt(c.start) & date <= toInt(c.end)) {
 					if (c.timeplotMgr.contains(date)){
 					 	Timeplot t = c.timeplotMgr.get(date);
-					 	if (!t.meetingMgr.isEmpty()){
+					 	if (t.meetingMgr.size() != 0){
 					 		for(Iterator<String> ky = t.meetingMgr.keySet().iterator(); ky.hasNext();){
-					 			this.frame.textModel.addElement(t.meetingMgr.get(ky.next()).getString());
+					 			mList.add(t.meetingMgr.get(ky.next()).toString());
 					 		}
 						}
 					}
 				}
 			}
+			this.frame.textList.setListData((String[]) mList.toArray());
 		}
 		sdd.dispose();
 		frame.repaint();
@@ -60,28 +57,26 @@ public class ShowController {
 	
 	public void ShowMonth() {
 		SelectDateDialog sdd = new SelectDateDialog();
-		sdd.setModal(true);
-		sdd.setVisible(true);
-		//sdd.getDayField().setVisible(false);
-		//sdd.getDayField().setEnabled(false);
+		sdd.getDayField().setVisible(false);
 		if (sdd.wasUpdated()) {
-			this.frame.textModel.clear();
+			ArrayList<String> mList = new ArrayList<>(); 
 			String year = sdd.getYearField().getText();
 			String month = sdd.getMonthField().getText();
 			
 			for(Iterator<String> itr = this.frame.curCalendarMgr.keySet().iterator(); itr.hasNext();){
 				Calendar c = this.frame.curCalendarMgr.get(itr.next());
-				if (c.start.startsWith(year+month)) {
+				if (String.valueOf(c.start).startsWith(year+month)) {
 					for (Iterator<String> tky = c.timeplotMgr.keySet().iterator(); tky.hasNext();){
 						Timeplot t = c.timeplotMgr.get(tky.next()); 
 
 						for (Iterator<String> mky = t.meetingMgr.keySet().iterator(); mky.hasNext();){
 							String m = t.meetingMgr.get(mky.next()).getString();
-							this.frame.textModel.addElement(m);
+							mList.add(m);
 						}
 					}
 				}
 			}
+			this.frame.textList.setListData((String[]) mList.toArray());
 		}
 		sdd.dispose();
 		frame.repaint();

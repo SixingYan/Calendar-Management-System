@@ -61,6 +61,7 @@ public class SelectTimeDialog extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						updated = true;
+						SelectTimeDialog.this.setVisible(false);
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -72,6 +73,7 @@ public class SelectTimeDialog extends JDialog {
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						updated = false;
+						SelectTimeDialog.this.setVisible(false);
 					}
 				});
 				cancelButton.setActionCommand("Cancel");

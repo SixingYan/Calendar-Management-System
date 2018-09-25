@@ -7,33 +7,40 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-
 import controller.AddController;
 import controller.LoadController;
+import controller.QuitController;
 import controller.RemoveController;
+import controller.SaveController;
+import controller.ShowController;
 import model.Calendar;
 
 import javax.swing.JList;
 import javax.swing.JButton;
 import java.awt.Component;
 import javax.swing.Box;
+import javax.swing.DefaultListModel;
+
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Hashtable;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import java.awt.Window.Type;
+import javax.swing.JScrollBar;
 
 public class MainFrame extends JFrame {
 
 	private JPanel contentPane;
-	public Hashtable<String, Calendar> curCalendarMgr;
+	public Hashtable<String, Calendar> curCalendarMgr;// = new Hashtable<>();
 	public String curCalendar;
-	public int curTimeplot;
-	public int curMeeting;
-	public JList<String> textList;
+	public String curTimeplot;
+	public String curMeeting;
+	
 	public JTextPane valueField;
 	public JTextPane objectField;
-
+	public DefaultListModel textModel = new DefaultListModel();
+	public JList textList = new JList(textModel);
 	/**
 	 * Launch the application.
 	 */
@@ -64,12 +71,16 @@ public class MainFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		textList = new JList();
-		//textList.setListData(textArrList.toArray());
+		//textList = new JList<String>();
 		textList.setBounds(192, 70, 416, 369);
 		contentPane.add(textList);
 		
 		JButton btnNewButton = new JButton("Add +");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new AddController(MainFrame.this).add();
+			}
+		});
 		btnNewButton.setBounds(645, 70, 117, 29);
 		contentPane.add(btnNewButton);
 		
@@ -94,6 +105,7 @@ public class MainFrame extends JFrame {
 		JButton btnNewButton_4 = new JButton("Show Date Schedule");
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new ShowController(MainFrame.this).ShowDate();
 			}
 		});
 		btnNewButton_4.setBounds(6, 126, 177, 29);
@@ -101,29 +113,53 @@ public class MainFrame extends JFrame {
 		
 		this.objectField = new JTextPane();
 		objectField.setEditable(false);
-		objectField.setText("Calendar");
-		objectField.setBounds(192, 26, 208, 32);
+		objectField.setText("Calendars");
+		objectField.setBounds(192, 26, 106, 32);
 		contentPane.add(objectField);
 		
 		this.valueField = new JTextPane();
 		valueField.setEditable(false);
 		valueField.setText("All");
-		valueField.setBounds(399, 26, 208, 32);
+		valueField.setBounds(298, 26, 309, 32);
 		contentPane.add(valueField);
 
 		JButton btnShowAllCalendars = new JButton("Show All Calendars");
+		btnShowAllCalendars.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ShowController(MainFrame.this).ShowCalendars();
+			}
+		});
 		btnShowAllCalendars.setBounds(6, 70, 177, 29);
 		contentPane.add(btnShowAllCalendars);
 		
 		JButton btnShowMonthSchedule = new JButton("Show Month Schedule");
+		btnShowMonthSchedule.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ShowController(MainFrame.this).ShowMonth();
+			}
+		});
 		btnShowMonthSchedule.setBounds(6, 161, 177, 29);
 		contentPane.add(btnShowMonthSchedule);
 		
 		JButton btnCloseTimeplot = new JButton("Close Timeplot");
+		btnCloseTimeplot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnCloseTimeplot.setBounds(6, 202, 177, 29);
 		contentPane.add(btnCloseTimeplot);
 		
 		JButton btnNewButton_5 = new JButton("Save");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new SaveController(MainFrame.this).save();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnNewButton_5.setBounds(6, 338, 117, 29);
 		contentPane.add(btnNewButton_5);
 		
@@ -136,14 +172,22 @@ public class MainFrame extends JFrame {
 		contentPane.add(btnNewButton_6);
 		
 		JButton btnNewButton_7 = new JButton("Quit");
+		btnNewButton_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new QuitController().confirm(MainFrame.this);
+			}
+		});
 		btnNewButton_7.setBounds(6, 420, 117, 29);
 		contentPane.add(btnNewButton_7);
 		
 	}
 	
 	public MainFrame(Hashtable<String, Calendar> calendarMgr) {
+		this();
 		this.curCalendarMgr = calendarMgr;
-		MainFrame();
+		if (!this.curCalendarMgr.isEmpty()){
+			new ShowController(MainFrame.this).ShowCalendars();
+		}
 	}
 	
 	public String getString(JTextPane field) {

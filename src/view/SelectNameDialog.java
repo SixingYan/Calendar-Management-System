@@ -80,6 +80,8 @@ public class SelectNameDialog extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						updated = true;
+						SelectNameDialog.this.setVisible(false);
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -90,6 +92,8 @@ public class SelectNameDialog extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						updated = false;
+						SelectNameDialog.this.setVisible(false);
 					}
 				});
 				cancelButton.setActionCommand("Cancel");

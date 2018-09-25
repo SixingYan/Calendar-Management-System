@@ -1,5 +1,6 @@
-package controller;
 
+
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import model.Calendar;
@@ -21,11 +22,11 @@ public class LoadController {
 		String object = this.frame.getString(frame.objectField);
 		String value = this.frame.getString(frame.valueField);
 
-		if (object.equals("Calendars") & value.equals("All"))
+		if (object.equals("calendars") & value.equals("all"))
 			loadCalendar();
-		else if (object.equals("Timeplots"))
+		else if (object.equals("timeplots"))
 			loadTimeplot();
-		else if (object.equals("Meetings"))
+		else if (object.equals("meetings"))
 			loadMeeting();
 		else ;
 
@@ -33,8 +34,6 @@ public class LoadController {
 
 	public void loadCalendar () {
 		SelectNameDialog sbd = new SelectNameDialog();
-		sbd.setModal(true);
-		sbd.setVisible(true);
 		
 		if (sbd.wasUpdated()) {
 			String name = sbd.getNameField().getText();
@@ -43,21 +42,19 @@ public class LoadController {
 			this.frame.valueField.setText(c.name + " " + c.getRangeDateStr()); 
 
 			this.frame.curCalendar = name;
-			this.frame.objectField.setText("Timeplots");
-			this.frame.valueField.setText(name); 
 
-			this.frame.textModel.clear();
+			ArrayList<String> arr = new ArrayList<>();
 			for(Iterator<String> itr = c.timeplotMgr.keySet().iterator(); itr.hasNext();)
-				this.frame.textModel.addElement(c.timeplotMgr.get(itr.next()).getString());
+				arr.add(c.timeplotMgr.get(itr.next()).getString());
+			this.frame.textList.setListData((String[]) arr.toArray());
 		}
 		sbd.dispose();
+
 		frame.repaint();
 	}
 
 	public void loadTimeplot ()  {
 		SelectDateDialog sdd = new SelectDateDialog();
-		sdd.setModal(true);
-		sdd.setVisible(true);
 		if (sdd.wasUpdated()) {
 			String year = sdd.getYearField().getText();
 			String month = sdd.getMonthField().getText();
@@ -66,40 +63,40 @@ public class LoadController {
 			String date = year+month+day;
 			Calendar c = this.frame.curCalendarMgr.get(this.frame.curCalendar);
 			Timeplot t = c.timeplotMgr.get(date); 
-			
-			this.frame.curTimeplot = date;
-			this.frame.objectField.setText("Meetings");
 			this.frame.valueField.setText(year+month+day); 
-			this.frame.textModel.clear();
-			if (!t.meetingMgr.isEmpty())
-				for(Iterator<String> itr = t.meetingMgr.keySet().iterator(); itr.hasNext();)
-					this.frame.textModel.addElement(t.meetingMgr.get(itr.next()).getString());
+
+			ArrayList<String> arr = new ArrayList<>();
+			this.frame.curTimeplot = date;
+			for(Iterator<String> itr = t.meetingMgr.keySet().iterator(); itr.hasNext();)
+				arr.add(t.meetingMgr.get(itr.next()).getString());
+			
+			this.frame.textList.setListData((String[]) arr.toArray());
+
 		}
 		sdd.dispose();
+
 		frame.repaint();
 	}
 
 	public void loadMeeting () {
 		SelectTimeDialog std = new SelectTimeDialog();
-		std.setModal(true);
-		std.setVisible(true);
-		System.out.print("out1");
 		if (std.wasUpdated()) {
 			String time = std.getTimeField().getText();
+
 			Calendar c = this.frame.curCalendarMgr.get(this.frame.curCalendar);
 			Timeplot t = c.timeplotMgr.get(this.frame.curTimeplot);
-			System.out.print("out2");
 			Meeting m = t.meetingMgr.get(time);
-			System.out.print("out3");
+
+			ArrayList<String> arr = new ArrayList<>();
 			this.frame.curMeeting = time;
-			this.frame.objectField.setText("Meeting");
-			this.frame.valueField.setText(time);
-			System.out.print("out4");
-			this.frame.textModel.clear();
 			for(int i=0; i < m.people.size(); i++)
-				this.frame.textModel.addElement(m.people.get(i));
+				arr.add(m.people.get(i));
+
+			this.frame.textList.setListData((String[]) arr.toArray());
+
 		}
 		std.dispose();
+
 		frame.repaint();
 	}
 

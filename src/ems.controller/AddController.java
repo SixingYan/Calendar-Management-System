@@ -1,4 +1,4 @@
-package controller;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,12 +29,12 @@ public class AddController {
 		 */
 		String object = this.frame.getString(frame.objectField);
 		String value = this.frame.getString(frame.valueField);
-		
-		if (object.equals("Calendars") & value.equals("All"))
+
+		if (object.equals("calendars") & value.equals("all"))
 			addCalendar();
-		else if (object.equals("Timeplots"))
+		else if (object.equals("timeplots"))
 			addTimeplot();
-		else if (object.equals("Meetings"))
+		else if (object.equals("meetings"))
 			addMeeting();
 		//else if (object.equals("meeting"))
 		//	addPerson();
@@ -44,15 +44,13 @@ public class AddController {
 	public void addCalendar() {
 		// 要放入一些初始化参数
 		AddCalendarDialog acd = new AddCalendarDialog();
-		
 		acd.getDurationComboBox().addItem(10);
 		acd.getDurationComboBox().addItem(15);
 		acd.getDurationComboBox().addItem(20);
 		acd.getDurationComboBox().addItem(30);
 		acd.getDurationComboBox().addItem(60);
-
-		//acd.getOkButton().setEnabled(false);
 		acd.setModal(true);
+		acd.getOkButton().setEnabled(false);
 		acd.setVisible(true);
 
 		if (acd.wasUpdated()) {
@@ -68,28 +66,28 @@ public class AddController {
 			String endDow = acd.getEndDoWField().getText();
 			String earlyText = acd.getEarlyField().getText();
 			String lateText = acd.getLateField().getText();
+
 			String start = startYear+startMonth+startDay;
 			String end = endYear+endMonth+endDay;
 			String early = earlyText;
 			String late = lateText;
-			
+
 			// update mgr
 			Calendar c = new Calendar(name, start, end, String.valueOf(duration), early, late);
 			this.frame.curCalendarMgr.put(name, c);
+
 			// update
-			this.frame.textModel.clear();
-			for(Iterator<String> cky = this.frame.curCalendarMgr.keySet().iterator(); cky.hasNext();)
-				this.frame.textModel.addElement(this.frame.curCalendarMgr.get(cky.next()).getString());
+			//this.frame.textList.add(c.getString());
 		}
-		acd.dispose();
-		this.frame.repaint();
+
+		//acd.dispose();
+
+		frame.repaint();
 
 	} 
 
 	public void addTimeplot() {
 		AddTimeplotDialog atd = new AddTimeplotDialog();
-		atd.setModal(true);
-		atd.setVisible(true);
 
 		if (atd.wasUpdated()) {
 			String year = atd.getYearField().getText();
@@ -103,41 +101,80 @@ public class AddController {
 			this.frame.curCalendarMgr.put(curCalName, c);
 
 			// update the JList
-			this.frame.textModel.clear();
+			//this.frame.textList.add(t.getString());
+			ArrayList<String> arr = new ArrayList<>();
 			for(Iterator<String> itr = c.timeplotMgr.keySet().iterator(); itr.hasNext();)
-				this.frame.textModel.addElement(t.meetingMgr.get(itr.next()).getString());
+				arr.add(t.meetingMgr.get(itr.next()).getString());
+			this.frame.textList.setListData((String[]) arr.toArray());
 		}
 		atd.dispose();
+
 		frame.repaint();
 	}
 
 	public void addMeeting() {
 
 		AddMeetingDialog amd = new AddMeetingDialog();
-		amd.setModal(true);
-		amd.setVisible(true);
 
 		if (amd.wasUpdated()) {
-			System.out.println("out1");
 			String time = amd.getTimeField().getText();
 			String location = amd.getLocationField().getText();
 			
-			System.out.println("out2");
+			ListModel<String> peopleList = amd.getPersonList().getModel();
+			
+			ArrayList<String> people = new ArrayList<>();
+			for (int i=0;i< peopleList.getSize();i++)
+				people.add(peopleList.getElementAt(i));
+			
+			Meeting m = new Meeting(time, location, people);
 			
 			// update the calendar mgr
 			Calendar c = this.frame.curCalendarMgr.get(this.frame.curCalendar);
 			Timeplot t = c.timeplotMgr.get(this.frame.curTimeplot);
-			Meeting m = new Meeting(c.duration,time, location, amd.people);
 			t.meetingMgr.put(time, m);
 			c.timeplotMgr.put(this.frame.curTimeplot, t);
 			this.frame.curCalendarMgr.put(this.frame.curCalendar, c);
-			System.out.println("out3");
+
 			// update the JList
-			this.frame.textModel.clear();
+			ArrayList<String> arr = new ArrayList<>();
 			for(Iterator<String> itr = t.meetingMgr.keySet().iterator(); itr.hasNext();)
-				this.frame.textModel.addElement(t.meetingMgr.get(itr.next()).getString());
+				arr.add(t.meetingMgr.get(itr.next()).getString());
+			this.frame.textList.setListData((String[]) arr.toArray());
 		}
 		amd.dispose();
+
+		// update JList
+
 		frame.repaint();
+
 	}
+
+	public void addPerson(AddMeetingDialog amd) {
+		// update the JList
+		if (amd.nameWasUpdated()){
+			String name = amd.getNameField().getText();
+			//amd.getPersonList().add(name);
+			amd.getNameField().setText(null);
+		}
+		amd.repaint();
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

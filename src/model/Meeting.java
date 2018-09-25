@@ -1,36 +1,29 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 
-public class Meeting{
-	public ArrayList<String> people;
+public class Meeting implements Serializable{
+	public ArrayList<String> people = new ArrayList<>();
 	Boolean status;
 	String location;
-	int start;
-	int duration;
-
+	String start;
+	String duration;
+	
+	public Meeting (String duration, String start, String location, ArrayList<String> people) {
+		this.duration = duration;
+		this.start = start;
+		this.location = location;
+		this.people = people;
+	}
+	
 	public String getString () {
-		return String.valueOf(this.start) + " " + String.valueOf(this.duration) + "min " + getStatusStr(); 
+		return String.valueOf(this.start) + " " + String.valueOf(this.duration) + "min " + location + " " + people.toString(); 
 	}
 
 	public String getStatusStr () {
 		if (status) return "activated";
 		return "closed";
-	}
-
-	public Meeting (String location) {
-		this.location = location;
-	}
-
-	public Meeting (ArrayList<String> people) {
-		this.people = people;
-		this.location = "Fuller Lab";
-	}
-	
-	public Meeting (ArrayList<String> people, String location) {
-		this.people = people;
-		this.location = location;
 	}
 
 	public void open() {
