@@ -1,5 +1,5 @@
 # Calendar-Management-System
-This is a eCalendar Management System.
+This is a eCalendar Management System (EMS).
 
 In this system, the date is 8-digit as YYYYMMDD, the time is 4-digit as HHMM, every input of date or time is expected to follow this rule.
 

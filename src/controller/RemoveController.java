@@ -62,7 +62,7 @@ public class RemoveController {
 			c.removeDay(date);
 			
 			this.frame.curCalendarMgr.put(this.frame.curCalendar, c);
-			System.out.print("do hea!");
+			
 			this.frame.textModel.clear();
 			for(Iterator<String> itr = c.timeplotMgr.keySet().iterator(); itr.hasNext();)
 				this.frame.textModel.addElement(c.timeplotMgr.get(itr.next()).getString());
